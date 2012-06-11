@@ -13,13 +13,17 @@ class MenuGroup(models.Model):
 		verbose_name=_('Text'),
 		help_text='''<a class="btn" href="#" onclick="tinyMCE.execCommand('mceToggleEditor', false, 'id_text');">''' + _('ON \ OFF') + '</a> '
 	)
-
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+	
 	def menu(self):
-		return '<a href="../menu/?group__id__exact=%s"><img src="%menu_item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
+		return '<a href="../menu/?group__id__exact=%s"><img src="%smenu_item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
 	menu.allow_tags = True
 
 	def count(self):
+		short_description = _('Count')
 		return Menu.objects.filter(group=self.id).count()
 	count.short_description = _('Count')
 
@@ -46,7 +50,9 @@ class Menu(models.Model):
 	)
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
-
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+	
 	def icon_preview(self):
 		if self.icon:
 			return '<img src="%s">' % self.icon.url
