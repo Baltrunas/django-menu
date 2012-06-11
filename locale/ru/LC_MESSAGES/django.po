@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-25 21:00+0400\n"
+"POT-Creation-Date: 2012-06-11 14:22+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,62 +16,76 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:8 models.py:34
+#: models.py:8 models.py:33
 msgid "Name"
 msgstr "Имя"
 
 #: models.py:9
-msgid "Type"
-msgstr "Тип"
+msgid "Slug"
+msgstr "Ярлык"
 
-#: models.py:11 models.py:12 models.py:42 models.py:43
+#: models.py:9
+msgid ""
+"A slug is the part of a URL which identifies a page using human-readable "
+"keywords"
+msgstr ""
+"«Ярлык» — это вариант названия, подходящий для URL. Обычно содержит только "
+"латинские буквы в нижнем регистре, цифры и дефисы."
+
+#: models.py:11 models.py:41 models.py:42
 msgid "Text"
 msgstr "Текст"
 
-#: models.py:12 models.py:43
+#: models.py:12 models.py:42
 msgid "ON \\ OFF"
 msgstr ""
 
-#: models.py:18 models.py:79 models.py:89 models.py:94
+#: models.py:17 models.py:78 models.py:88 models.py:93
 msgid "Menu"
 msgstr "Меню"
 
-#: models.py:23
+#: models.py:22
 msgid "Count"
 msgstr "Количество"
 
-#: models.py:30 models.py:37
+#: models.py:29 models.py:36
 msgid "Menu Group"
 msgstr "Группу меню"
 
-#: models.py:31
+#: models.py:30
 msgid "Menus Groups"
 msgstr "Группы меню"
 
-#: models.py:35
+#: models.py:34
 msgid "URL"
 msgstr "URL"
 
-#: models.py:36
+#: models.py:35
 msgid "Order"
 msgstr ""
 
-#: models.py:38
+#: models.py:37
 msgid "Parent"
 msgstr "Родитель"
 
-#: models.py:39 models.py:54
+#: models.py:38 models.py:53
 msgid "Icon"
 msgstr "Иконка"
 
-#: models.py:46
+#: models.py:45
 msgid "Sort"
 msgstr "Сортировка"
 
-#: models.py:47
+#: models.py:46
 msgid "Public"
 msgstr "Публикация"
 
-#: models.py:95
+#: models.py:94
 msgid "Menus"
 msgstr "Меню"
+
+#~ msgid "slug"
+#~ msgstr "Ярлык"
+
+#~ msgid "Type"
+#~ msgstr "Тип"
