@@ -5,7 +5,7 @@
 		{% for item in menu %}
 			<li id='{{item.group.slug}}-item-{{item.id}}' {%if item.url == '/' and url == '/'%} class='this' {%endif%} {%if item.url != '/' and item.url in url%} class='this' {%endif%} {%if item.url == '/' and 'blog' in url%} class='this' {%endif%}>
 				<a href='{{item.url}}'>
-					{% if item.icon %}<img src='{{item.icon.url}}' style='margin: 0px; padding: 0px;'>{% endif %}
+					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
 					{{item.name}}
 				</a>
 				{% if item.childs.count > 0 %}
@@ -19,7 +19,7 @@
 		{% for item in childs %}
 			<li id='{{item.group.slug}}-item-{{item.id}}'>
 				<a href="{{ item.url }}">
-					{% if item.icon %}<img src='{{item.icon.url}}' style='margin: 0px; padding: 0px;'>{% endif %}
+					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
 					{{ item.name }}
 				</a>
 				{% if item.childs.count > 0 %}

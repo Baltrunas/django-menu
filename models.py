@@ -62,7 +62,7 @@ class Menu(models.Model):
 			return order_puth
 		else:
 			order_puth = Menu.objects.get(pk=id).name
-			return self.order_puth(Menu.objects.get(pk=Menu.objects.get(pk=id).parent.id).id) + '|' + order_puth
+			return self.order_puth(Menu.objects.get(pk=Menu.objects.get(pk=id).parent.id).id) + '\\' + order_puth
 
 	def save(self, *args, **kwargs):
 		super(Menu, self).save(*args, **kwargs)
@@ -74,8 +74,8 @@ class Menu(models.Model):
 	def display(self):
 		space = ''
 		for x in self.order:
-			if x == '|':
-				space += '|___'
+			if x == '\\':
+				space += '\\___'
 		return '<span style="color: #fff">%s</span>%s' % (space, self.name)
 	display.short_description = _('Menu')
 	display.allow_tags = True
@@ -84,9 +84,8 @@ class Menu(models.Model):
 	def __unicode__(self):
 		space = ''
 		for x in self.order:
-			if x == '|':
-				space += '|___'
-		
+			if x == '\\':
+				space += '\\___'
 		return '%s%s' % (space, self.name)
 	__unicode__.short_description = _('Menu')
 	__unicode__.allow_tags = True
