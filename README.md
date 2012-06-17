@@ -3,6 +3,10 @@ django-menu
 
 Simple tree menu for Django!
 
+Removed
+=======
+* WYSIWYG was removed to the essentials
+
 Added
 =======
 * MenuGroup public
@@ -11,30 +15,27 @@ Added
 * Menu created_at
 * Menu updated_at
 
-Futures
+Fix
 =======
-All
---------
-* WYSIWYG ?
-* Create new template ?
-* Retranslate ?
+* New translation for russian
 
-Menu
---------
+Future fix
+=======
+* Create new template
+
+* New form for admin
 * order_puth
 * save
 * display
 * __unicode__
 
-Admin
---------
-* WYSIWYG ?
-* Form
+* Add fixtures
+* Add test
 
 How to use
 =======
-* add to INSTALLED_APPS
-* syncdb
-* collectstatic
+* Add to INSTALLED_APPS
+* manage.py syncdb
+* manage.py collectstatic
 {% load menu_tree %}
 {% menu_tree main_menu 'menu_tree.html' request.path_info %}

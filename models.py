@@ -9,10 +9,7 @@ from django.core.urlresolvers import reverse
 class MenuGroup(models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
-	text = models.TextField(
-		verbose_name=_('Text'),
-		help_text='''<a class="btn" href="#" onclick="tinyMCE.execCommand('mceToggleEditor', false, 'id_text');">''' + _('ON \ OFF') + '</a> '
-	)
+	text = models.TextField(verbose_name=_('Text'), blank=True)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -42,12 +39,7 @@ class Menu(models.Model):
 	group = models.ForeignKey(MenuGroup, verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
-
-	text = models.TextField(
-		verbose_name=_('Text'),
-		help_text='''<a class="btn" href="#" onclick="tinyMCE.execCommand('mceToggleEditor', false, 'id_text');">''' + _('ON \ OFF') + '</a> ' + _('Text'),
-		blank=True
-	)
+	text = models.TextField(verbose_name=_('Text'), blank=True)
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
@@ -82,7 +74,7 @@ class Menu(models.Model):
 		for x in self.order:
 			if x == '\\':
 				space += '\\___'
-		return '<span style="color: #fff">%s</span>%s' % (space, self.name)
+		return '<span style="color: transparent">%s</span>%s' % (space, self.name)
 	display.short_description = _('Menu')
 	display.allow_tags = True
 

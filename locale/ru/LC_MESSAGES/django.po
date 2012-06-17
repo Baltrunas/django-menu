@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-11 14:22+0400\n"
+"POT-Creation-Date: 2012-06-11 20:02+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:8 models.py:33
+#: models.py:10 models.py:36
 msgid "Name"
 msgstr "Имя"
 
-#: models.py:9
+#: models.py:11
 msgid "Slug"
 msgstr "Ярлык"
 
-#: models.py:9
+#: models.py:11
 msgid ""
 "A slug is the part of a URL which identifies a page using human-readable "
 "keywords"
@@ -32,60 +32,58 @@ msgstr ""
 "«Ярлык» — это вариант названия, подходящий для URL. Обычно содержит только "
 "латинские буквы в нижнем регистре, цифры и дефисы."
 
-#: models.py:11 models.py:41 models.py:42
+#: models.py:12 models.py:42
 msgid "Text"
 msgstr "Текст"
 
-#: models.py:12 models.py:42
-msgid "ON \\ OFF"
-msgstr ""
+#: models.py:13 models.py:44
+msgid "Public"
+msgstr "Публикация"
 
-#: models.py:17 models.py:78 models.py:88 models.py:93
+#: models.py:14 models.py:45
+msgid "Created At"
+msgstr "Создано"
+
+#: models.py:15 models.py:46
+msgid "Updated At"
+msgstr "Обновлено"
+
+#: models.py:19 models.py:78 models.py:88 models.py:93
 msgid "Menu"
 msgstr "Меню"
 
-#: models.py:22
+#: models.py:23 models.py:25
 msgid "Count"
 msgstr "Количество"
 
-#: models.py:29 models.py:36
+#: models.py:32 models.py:39
 msgid "Menu Group"
 msgstr "Группу меню"
 
-#: models.py:30
+#: models.py:33
 msgid "Menus Groups"
 msgstr "Группы меню"
 
-#: models.py:34
+#: models.py:37
 msgid "URL"
 msgstr "URL"
 
-#: models.py:35
+#: models.py:38
 msgid "Order"
-msgstr ""
+msgstr "Порядок"
 
-#: models.py:37
+#: models.py:40
 msgid "Parent"
 msgstr "Родитель"
 
-#: models.py:38 models.py:53
+#: models.py:41 models.py:53
 msgid "Icon"
 msgstr "Иконка"
 
-#: models.py:45
+#: models.py:43
 msgid "Sort"
 msgstr "Сортировка"
-
-#: models.py:46
-msgid "Public"
-msgstr "Публикация"
 
 #: models.py:94
 msgid "Menus"
 msgstr "Меню"
-
-#~ msgid "slug"
-#~ msgstr "Ярлык"
-
-#~ msgid "Type"
-#~ msgstr "Тип"
