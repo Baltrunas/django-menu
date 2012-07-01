@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-29 23:55+0400\n"
+"POT-Creation-Date: 2012-07-01 17:19+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:13 models.py:40
+#: models.py:13 models.py:39
 msgid "Name"
 msgstr "Имя"
 
@@ -32,78 +32,82 @@ msgstr ""
 "«Ярлык» — это вариант названия, подходящий для URL. Обычно содержит только "
 "латинские буквы в нижнем регистре, цифры и дефисы."
 
-#: models.py:15 models.py:59
+#: models.py:15 models.py:55
 msgid "Text"
 msgstr "Текст"
 
-#: models.py:17 models.py:61
+#: models.py:16
+msgid "Sites"
+msgstr "Сайты"
+
+#: models.py:17 models.py:57
 msgid "Public"
 msgstr "Публикация"
 
-#: models.py:18 models.py:62
+#: models.py:18 models.py:58
 msgid "Created At"
 msgstr "Создано"
 
-#: models.py:19 models.py:63
+#: models.py:19 models.py:59
 msgid "Updated At"
 msgstr "Обновлено"
 
-#: models.py:23 models.py:109 models.py:119 models.py:124
+#: models.py:23 models.py:104 models.py:113
 msgid "Menu"
 msgstr "Меню"
 
-#: models.py:27 models.py:29
+#: models.py:28
 msgid "Count"
 msgstr "Количество"
 
-#: models.py:36 models.py:55
+#: models.py:35 models.py:52
 msgid "Menu Group"
 msgstr "Группу меню"
 
-#: models.py:37
-msgid "Menus Groups"
+#: models.py:36
+msgid "Menu Groups"
 msgstr "Группы меню"
 
-#: models.py:43
+#: models.py:41
 msgid "internal"
 msgstr "Внутренний"
 
-#: models.py:44
+#: models.py:42
 msgid "external"
 msgstr "Внешний"
 
-#: models.py:46
+#: models.py:44
 msgid "URL Type"
 msgstr "Тип URL"
 
-#: models.py:48
+#: models.py:45
 msgid "URL"
 msgstr "URL"
 
-#: models.py:50
+#: models.py:46
 msgid "Content Type"
 msgstr "Тип контента"
 
-#: models.py:51
+#: models.py:47
 msgid "Object ID"
 msgstr "ID Объекта"
 
-#: models.py:54
+#: models.py:50
 msgid "Order"
 msgstr "Порядок"
 
-#: models.py:56
+#: models.py:53
 msgid "Parent"
 msgstr "Родитель"
 
-#: models.py:58 models.py:84
+#: models.py:54 models.py:80
 msgid "Icon"
 msgstr "Иконка"
 
-#: models.py:60
+#: models.py:56
 msgid "Sort"
 msgstr "Сортировка"
 
-#: models.py:125
+#: models.py:114
 msgid "Menus"
 msgstr "Меню"

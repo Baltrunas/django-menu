@@ -32,18 +32,18 @@
 		});
 		
 		{% if change %}
-			$("#id_parent").load("/admin/menu/group/{{ original.menugroup.id }}/", function() {
+			$("#id_parent").load("/admin/menu/group/{{ original.group.id }}/{{ original.id }}/", function() {
 				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
 			});			
 		{% else %} 
 			$("#id_parent").empty();
 		{% endif %}
 		
-		$('#id_menugroup').change( function() {
-			if ($("#id_menugroup option:selected").val() == '') {
+		$('#id_group').change( function() {
+			if ($("#id_group option:selected").val() == '') {
 				$("#id_parent").text('');
 			} else {
-				$("#id_parent").load("/admin/menu/group/" + $("#id_menugroup option:selected").val() + "/");
+				$("#id_parent").load("/admin/menu/group/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
 			}
 		});
 	})();
