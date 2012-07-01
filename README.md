@@ -2,13 +2,15 @@
 Best tree menu for Django!
 
 # Futures
-* Add sothing like this http://habrahabr.ru/post/107372/ for MenuGroup in admin interface.
 * Modify the template tag so you do not need to use the view.
 * Create new template
-* order_puth
-* save
-* display
-* Add test
+
+# In plain
+* New views and templates
+* Optimization model, view, templates
+* Optimization save method
+* Add tests
+* Add FCBKcomplete for MenuGroup in admin interface.
 
 # How to use
 ## Install
@@ -36,6 +38,8 @@ main_menu = Menu.objects.filter(group__slug='main_menu', parent=None).order_by('
 ### Fix
 * __unicode__
 * Now use ugettext_lazy
+* Same changes in display method
+* Same changes in order_puth method
 
 ## 2012.06.17
 ### Added

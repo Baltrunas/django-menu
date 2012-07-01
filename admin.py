@@ -5,7 +5,7 @@ from menu.models import *
 class MenuGroupAdmin(admin.ModelAdmin):
 	list_display = ('name', 'slug', 'text', 'menu', 'count')
 	search_fields = ('name', 'slug', 'text', 'id')
-
+	
 admin.site.register(MenuGroup, MenuGroupAdmin)
 
 class MenuAdmin(admin.ModelAdmin):

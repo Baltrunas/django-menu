@@ -46,6 +46,18 @@
 				$("#id_parent").load("/admin/menu/group/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
 			}
 		});
+		
+		
+      $("#id_orgs, #id_dsts").fcbkcomplete({
+         json_url:'/subscribe_autocomplete',
+         first_selected:false,
+         filter_hide : true,
+         filter_case:false,
+         complete_text:"Enter country, city or airport.",
+         maxitems: 100
+         });
+
+		
 	})();
 </script>
 <style>

@@ -80,13 +80,13 @@ class Menu(models.Model):
 	icon_preview.short_description = _('Icon')
 	icon_preview.allow_tags = True
 
-
 	def order_puth (self, id):
-		order_puth = str(Menu.objects.get(pk=id).sort) + ':' + str(id)
-		if not Menu.objects.get(pk=id).parent:
-			return order_puth
+		this = Menu.objects.get(pk=id)
+		puth = str(this.sort) + ':' + this.name.replace('|', '')
+		if this.parent:
+			return self.order_puth(Menu.objects.get(pk=this.parent.id).id) + '|' + puth
 		else:
-			return self.order_puth(Menu.objects.get(pk=Menu.objects.get(pk=id).parent.id).id) + '|' + order_puth
+			return puth
 
 	def save(self, *args, **kwargs):
 		super(Menu, self).save(*args, **kwargs)
@@ -96,11 +96,7 @@ class Menu(models.Model):
 			item.save()
 
 	def display(self):
-		space = ''
-		for x in self.order:
-			if x == '|':
-				space += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-		return '<span style="color: transparent">%s</span>%s' % (space, self.name)
+		return '&nbsp;' * (len(self.order.split('|')) -1) * 8 + self.name
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
