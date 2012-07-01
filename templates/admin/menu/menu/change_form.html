@@ -1,0 +1,56 @@
+{% extends "admin/change_form.html" %}
+{% block after_field_sets %} 
+<script>
+	$(function (){
+		{% if change %}
+			{% if original.url_type == 'external' %}
+				$('.field-content_type').hide();
+				$('.field-object_id').hide();
+			{% else %}
+				$('.field-url').hide();
+			{% endif %}
+		{% else %} 
+			$('.field-url').hide();
+			$('.field-content_type').hide();
+			$('.field-object_id').hide();
+		{% endif %}
+		
+		$('#id_url_type').change( function() {
+			if ($("#id_url_type option:selected").val() == 'internal') {
+				$('.field-content_type').slideDown();
+				$('.field-object_id').slideDown();
+				$('.field-url').slideUp();
+			} else if ($("#id_url_type option:selected").val() == 'external') {
+				$('.field-content_type').slideUp();
+				$('.field-object_id').slideUp();
+				$('.field-url').slideDown();
+			} else {
+				$('.field-url').slideUp();
+				$('.field-content_type').slideUp();
+				$('.field-object_id').slideUp();
+			}
+		});
+		
+		{% if change %}
+			$("#id_parent").load("/admin/menu/group/{{ original.menugroup.id }}/", function() {
+				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
+			});			
+		{% else %} 
+			$("#id_parent").empty();
+		{% endif %}
+		
+		$('#id_menugroup').change( function() {
+			if ($("#id_menugroup option:selected").val() == '') {
+				$("#id_parent").text('');
+			} else {
+				$("#id_parent").load("/admin/menu/group/" + $("#id_menugroup option:selected").val() + "/");
+			}
+		});
+	})();
+</script>
+<style>
+	select, input {width: 25em!important;}
+	input.vIntegerField {width: 10em!important;}
+	input[type=checkbox] {width: 20px!important;}
+</style>
+{% endblock %}

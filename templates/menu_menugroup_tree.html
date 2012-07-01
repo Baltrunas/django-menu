@@ -1,0 +1,17 @@
+{% load menu_tree %}
+{% if menu %}
+	<option value=''>---------</option>
+	{% for item in menu %}
+		<option value='{{item.id}}'>{{item.name}}</option>
+		{% if item.childs.count > 0 %}
+			{% menu_tree item 'menu_menugroup_tree.html' url 2 %}
+		{% endif %}
+	{% endfor %}
+{% else %}
+	{% for item in childs %}
+		<option value='{{item.id}}'>{% for i in level_loop %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endfor %}{{item.name}}</option>
+		{% if item.childs.count > 0 %}
+			{% menu_tree item 'menu_menugroup_tree.html' url level %}
+		{% endif %}
+	{% endfor %}
+{% endif %}

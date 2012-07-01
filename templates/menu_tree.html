@@ -4,7 +4,7 @@
 	<ul id='{{menu.0.group.slug}}' class='level-{{level}}'>
 		{% for item in menu %}
 			<li id='{{item.group.slug}}-item-{{item.id}}' {%if item.url == '/' and url == '/'%} class='this' {%endif%} {%if item.url != '/' and item.url in url%} class='this' {%endif%} {%if item.url == '/' and 'blog' in url%} class='this' {%endif%}>
-				<a href='{{item.url}}'>
+				<a href='{{item.get_absolute_url}}'>
 					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
 					{{item.name}}
 				</a>
