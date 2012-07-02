@@ -1,16 +1,13 @@
 # django-menu
-Best tree menu for Django!
+Best tree menu for Django (1.4+)!
 
 # Futures
-* Modify the template tag so you do not need to use the view.
-* Create new template
-
-# In plain
 * New views and templates
 * Optimization model, view, templates
 * Optimization save method
 * Add tests
 * Add FCBKcomplete for MenuGroup in admin interface.
+* Add url type 'URLS' http://stackoverflow.com/questions/8151512/django-get-url-names-from-urls-py
 
 # How to use
 ## Install
@@ -20,15 +17,18 @@ Best tree menu for Django!
 * manage.py collectstatic
 
 ## Use
-### In view:
-main_menu = Menu.objects.filter(group__slug='main_menu', parent=None).order_by('sort')
-
 ### In template:
 {% load menu_tree %}
-{% menu_tree main_menu 'menu_tree.html' request.path_info %}
+{% menu_tree 'main_menu' %}
 
 
 # Changelog
+## 2012.07.02
+### Futures
+* Modify the template tag so you do not need to use the view.
+* Create new template
+
+
 ## 2012.07.01
 ### Added
 * External and internal menu type

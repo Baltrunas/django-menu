@@ -91,6 +91,8 @@ class Menu(models.Model):
 	def save(self, *args, **kwargs):
 		super(Menu, self).save(*args, **kwargs)
 		self.order = self.order_puth(self.id)
+		if self.parent:
+			self.group = self.parent.group
 		super(Menu, self).save(*args, **kwargs)
 		for item in Menu.objects.filter(parent = self.id):
 			item.save()
