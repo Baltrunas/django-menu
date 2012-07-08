@@ -28,6 +28,7 @@ Best tree menu for Django (1.4+)!
 * Optimized menu order_puth method.
 * Optimized menu save method.
 * Create new fixtures
+* __MenuGroup complete!__ Maybe in the future they will be changed but now I don `t know what could be improved.
 
 ## 2012.07.02
 ### Futures

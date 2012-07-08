@@ -3,8 +3,8 @@ from django.contrib import admin
 from menu.models import *
 
 class MenuGroupAdmin(admin.ModelAdmin):
-	list_display = ('name', 'slug', 'text', 'menu', 'count')
-	search_fields = ('name', 'slug', 'text', 'id')
+	list_display = ('name', 'slug', 'description', 'menu', 'count')
+	search_fields = ('name', 'slug', 'description', 'id')
 	
 admin.site.register(MenuGroup, MenuGroupAdmin)
 
