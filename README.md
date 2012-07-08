@@ -2,17 +2,16 @@
 Best tree menu for Django (1.4+)!
 
 # Futures
-* New views and templates
 * Optimization model, view, templates
-* Optimization save method
-* Add tests
-* Add FCBKcomplete for MenuGroup in admin interface.
-* Add url type 'URLS' http://stackoverflow.com/questions/8151512/django-get-url-names-from-urls-py
+* New views and templates for admin
+* include urls.py
+* May be add FCBKcomplete for MenuGroup in admin interface.
 
 # How to use
 ## Install
 * Add to INSTALLED_APPS 'menu'
 * Add to urls.py  url(r'^admin/menu/group/(?P<group_id>\d)/(?P<id>\d)/$', 'menu.views.tree'),
+* Add to urls.py  url(r'^admin/menu/url-patterns/$', 'menu.views.urls'),
 * manage.py syncdb
 * manage.py collectstatic
 
@@ -23,6 +22,13 @@ Best tree menu for Django (1.4+)!
 
 
 # Changelog
+## 2012.07.08
+### Added
+* Add url type 'URLs' url from urls.py by name with paramentrs
+* Optimized menu order_puth method.
+* Optimized menu save method.
+* Create new fixtures
+
 ## 2012.07.02
 ### Futures
 * Modify the template tag so you do not need to use the view.

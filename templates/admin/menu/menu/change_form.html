@@ -6,29 +6,67 @@
 			{% if original.url_type == 'external' %}
 				$('.field-content_type').hide();
 				$('.field-object_id').hide();
-			{% else %}
+			 	$('.field-url_patterns').hide();
+			 	$('.field-url_options').hide();
+			{% elif original.url_type == 'url-patterns' %}
+				$('.field-content_type').hide();
+				$('.field-object_id').hide();
 				$('.field-url').hide();
+			{% elif original.url_type == 'model-oblect' %}
+				$('.field-url').hide();
+			 	$('.field-url_patterns').hide();
+			 	$('.field-url_options').hide();
+			{% else %}
+				$('.field-content_type').hide();
+				$('.field-object_id').hide();
+				$('.field-url').hide();
+			 	$('.field-url_patterns').hide();
+			 	$('.field-url_options').hide();
 			{% endif %}
 		{% else %} 
 			$('.field-url').hide();
 			$('.field-content_type').hide();
 			$('.field-object_id').hide();
+			$('.field-url_patterns').hide();
+			$('.field-url_options').hide();
 		{% endif %}
 		
 		$('#id_url_type').change( function() {
-			if ($("#id_url_type option:selected").val() == 'internal') {
+			if ($("#id_url_type option:selected").val() == 'model-oblect') {
 				$('.field-content_type').slideDown();
 				$('.field-object_id').slideDown();
+				
 				$('.field-url').slideUp();
+			 	$('.field-url_patterns').slideUp();
+			 	$('.field-url_options').slideUp();
 			} else if ($("#id_url_type option:selected").val() == 'external') {
+				$('.field-url').slideDown();
+				
 				$('.field-content_type').slideUp();
 				$('.field-object_id').slideUp();
-				$('.field-url').slideDown();
+			 	$('.field-url_patterns').slideUp();
+			 	$('.field-url_options').slideUp();				
+			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
+			 	$('.field-url_patterns').slideDown();
+			 	$('.field-url_options').slideDown();
+				
+				$('.field-url').slideUp();
+				$('.field-content_type').slideUp();
+			 	$('.field-object_id').slideUp();
 			} else {
 				$('.field-url').slideUp();
 				$('.field-content_type').slideUp();
 				$('.field-object_id').slideUp();
+			 	$('.field-url_patterns').slideUp();
+			 	$('.field-url_options').slideUp();
 			}
+		});
+
+		var url_patterns = $("#id_url_patterns").val();
+		$("#id_url_patterns").remove();
+		$('.field-url_patterns').append('<select id="id_url_patterns" name="url_patterns"></select>');
+		$("#id_url_patterns").load("/admin/menu/url-patterns/", function() {
+			$("#id_url_patterns option[value=" + url_patterns + "]").attr('selected', 'selected');
 		});
 		
 		{% if change %}
@@ -41,23 +79,11 @@
 		
 		$('#id_group').change( function() {
 			if ($("#id_group option:selected").val() == '') {
-				$("#id_parent").text('');
+				$("#id_parent").empty();
 			} else {
 				$("#id_parent").load("/admin/menu/group/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
 			}
 		});
-		
-		
-      $("#id_orgs, #id_dsts").fcbkcomplete({
-         json_url:'/subscribe_autocomplete',
-         first_selected:false,
-         filter_hide : true,
-         filter_case:false,
-         complete_text:"Enter country, city or airport.",
-         maxitems: 100
-         });
-
-		
 	})();
 </script>
 <style>
