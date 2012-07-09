@@ -24,7 +24,6 @@ Best tree menu for Django (1.4+)!
 {% load menu_tree %}
 {% menu_tree 'main_menu' %}
 
-
 # Changelog
 ## 2012.07.09
 * include urls.py
