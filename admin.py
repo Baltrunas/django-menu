@@ -9,7 +9,7 @@ class MenuGroupAdmin(admin.ModelAdmin):
 admin.site.register(MenuGroup, MenuGroupAdmin)
 
 class MenuAdmin(admin.ModelAdmin):
-	list_display = ('display', 'url', 'group', 'sort', 'public', 'icon_preview', 'url_type', 'order')
+	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('public', 'sort')
 	list_filter = ('group', 'public')

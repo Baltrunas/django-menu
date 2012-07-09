@@ -2,6 +2,7 @@
 {% block after_field_sets %} 
 <script>
 	$(function (){
+		// /*
 		{% if change %}
 			{% if original.url_type == 'external' %}
 				$('.field-content_type').hide();
@@ -30,29 +31,29 @@
 			$('.field-url_patterns').hide();
 			$('.field-url_options').hide();
 		{% endif %}
-		
+		// */
 		$('#id_url_type').change( function() {
-			if ($("#id_url_type option:selected").val() == 'model-oblect') {
+			if ($("#id_url_type option:selected").val() == 'external') {
+				$('.field-url').slideDown();
+				
+				$('.field-content_type').slideUp();
+				$('.field-object_id').slideUp();
+			 	$('.field-url_patterns').slideUp();
+			 	$('.field-url_options').slideUp();
+			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
+			 	$('.field-url_patterns').show();
+			 	$('.field-url_options').show();
+				
+				$('.field-url').hide();
+				$('.field-content_type').slideUp();
+			 	$('.field-object_id').slideUp();
+			} else if ($("#id_url_type option:selected").val() == 'model-oblect') {
 				$('.field-content_type').slideDown();
 				$('.field-object_id').slideDown();
 				
 				$('.field-url').slideUp();
 			 	$('.field-url_patterns').slideUp();
 			 	$('.field-url_options').slideUp();
-			} else if ($("#id_url_type option:selected").val() == 'external') {
-				$('.field-url').slideDown();
-				
-				$('.field-content_type').slideUp();
-				$('.field-object_id').slideUp();
-			 	$('.field-url_patterns').slideUp();
-			 	$('.field-url_options').slideUp();				
-			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
-			 	$('.field-url_patterns').slideDown();
-			 	$('.field-url_options').slideDown();
-				
-				$('.field-url').slideUp();
-				$('.field-content_type').slideUp();
-			 	$('.field-object_id').slideUp();
 			} else {
 				$('.field-url').slideUp();
 				$('.field-content_type').slideUp();
@@ -62,28 +63,32 @@
 			}
 		});
 
+		$('#id_url_type').change();
+		
+		/* Load url patterns list */
 		var url_patterns = $("#id_url_patterns").val();
 		$("#id_url_patterns").remove();
 		$('.field-url_patterns').append('<select id="id_url_patterns" name="url_patterns"></select>');
-		$("#id_url_patterns").load("/admin/menu/url-patterns/", function() {
+		$("#id_url_patterns").load('{% url menu_url_patterns %}', function() {
 			$("#id_url_patterns option[value=" + url_patterns + "]").attr('selected', 'selected');
 		});
-		
+		//*
 		{% if change %}
-			$("#id_parent").load("/admin/menu/group/{{ original.group.id }}/{{ original.id }}/", function() {
+			$("#id_parent").load("{% url menu_tree original.group.id original.id %}", function() {
 				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
 			});			
 		{% else %} 
 			$("#id_parent").empty();
 		{% endif %}
-		
+		//*/
 		$('#id_group').change( function() {
 			if ($("#id_group option:selected").val() == '') {
 				$("#id_parent").empty();
 			} else {
-				$("#id_parent").load("/admin/menu/group/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
+				$("#id_parent").load("/menu/tree/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
 			}
 		});
+		$('#id_group').change();
 	})();
 </script>
 <style>

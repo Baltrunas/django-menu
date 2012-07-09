@@ -54,23 +54,22 @@ class Menu(models.Model):
 		),
 	)
 	url_type = models.CharField(verbose_name=_('URL Type'), max_length=20, choices=URL_TYPE_CHOICES)
-	
+	# for external url
 	url = models.CharField(verbose_name=_('URL'), max_length=255, default='#', blank=True)
-	
+	# for model object
 	content_type = models.ForeignKey(ContentType, verbose_name=_('Content Type'), null=True, blank=True)
 	object_id = models.PositiveIntegerField(verbose_name=_('Object ID'), null=True, blank=True)
 	content_object = generic.GenericForeignKey('content_type', 'object_id')
-	
-	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
-
+	# for url patterns
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True)
 	
 	group = models.ForeignKey(MenuGroup, verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
-	text = models.TextField(verbose_name=_('Text'), blank=True)
+	description = models.TextField(verbose_name=_('Description'), blank=True)
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
+	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -127,7 +126,6 @@ class Menu(models.Model):
 		return '&nbsp;' * (len(self.order.split('|')) -1) * 8 + self.name
 	display.short_description = _('Menu')
 	display.allow_tags = True
-
 
 	def __unicode__(self):
 		return self.name

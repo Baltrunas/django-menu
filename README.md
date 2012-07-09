@@ -2,10 +2,14 @@
 Best tree menu for Django (1.4+)!
 
 # Futures
-* Optimization model, view, templates
-* New views and templates for admin
-* include urls.py
-* May be add FCBKcomplete for MenuGroup in admin interface.
+* Optimization
+
+# I think about
+* Optimization model
+* Optimization templates
+* Help and docs
+* Add FCBKcomplete for MenuGroup in admin interface.
+* WYSIWYG to description
 
 # How to use
 ## Install
@@ -22,13 +26,17 @@ Best tree menu for Django (1.4+)!
 
 
 # Changelog
+## 2012.07.09
+* include urls.py
+* New views for admin
+
 ## 2012.07.08
 ### Added
 * Add url type 'URLs' url from urls.py by name with paramentrs
 * Optimized menu order_puth method.
 * Optimized menu save method.
 * Create new fixtures
-* __MenuGroup complete!__ Maybe in the future they will be changed but now I don `t know what could be improved.
+* __MenuGroup complete!__ Maybe in the future MenuGroup will be changed but now I don `t know what could be improved.
 
 ## 2012.07.02
 ### Futures
