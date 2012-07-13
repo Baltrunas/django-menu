@@ -74,7 +74,7 @@
 		});
 		//*
 		{% if change %}
-			$("#id_parent").load("{% url menu_tree original.group.id original.id %}", function() {
+			$("#id_parent").load("{% url menu_tree group_id=original.group.id id=original.id %}", function() {
 				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
 			});			
 		{% else %} 

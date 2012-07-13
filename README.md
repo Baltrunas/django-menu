@@ -25,7 +25,12 @@ Best tree menu for Django (1.4+)!
 {% menu_tree 'main_menu' %}
 
 # Changelog
+### Fix
+## 2012.07.13
+* Bug with urls.py
+
 ## 2012.07.09
+### Added
 * include urls.py
 * New views for admin
 
