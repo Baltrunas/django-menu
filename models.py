@@ -138,7 +138,6 @@ class Menu(models.Model):
 class MenuOption(models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=256)
 	value = models.CharField(verbose_name=_('Value'), max_length=256)
-	# parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	
 	def __unicode__(self):
 		return self.name + '=' + self.value
