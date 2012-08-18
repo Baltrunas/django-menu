@@ -135,6 +135,14 @@ class Menu(models.Model):
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
 
-class MenuOptions(models.Model):
+class MenuOption(models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=256)
 	value = models.CharField(verbose_name=_('Value'), max_length=256)
+	
+	def __unicode__(self):
+		return self.name + '=' + self.value
+
+	class Meta:
+		ordering ['name']
+		verbose_name=_('Menu Option')
+		verbose_name_plural =_('Menu Options')
