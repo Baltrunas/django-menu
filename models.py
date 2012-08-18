@@ -134,3 +134,7 @@ class Menu(models.Model):
 		ordering = ['order', 'sort', 'name']
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
+
+class MenuOptions(models.Model):
+	name = models.CharField(verbose_name=_('Name'), max_length=256)
+	value = models.CharField(verbose_name=_('Value'), max_length=256)
