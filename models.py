@@ -143,6 +143,6 @@ class MenuOption(models.Model):
 		return self.name + '=' + self.value
 
 	class Meta:
-		ordering ['name']
+		ordering = ['name']
 		verbose_name=_('Menu Option')
 		verbose_name_plural =_('Menu Options')

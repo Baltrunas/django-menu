@@ -14,8 +14,7 @@ Best tree menu for Django (1.4+)!
 # How to use
 ## Install
 * Add to INSTALLED_APPS 'menu'
-* Add to urls.py  url(r'^admin/menu/group/(?P<group_id>\d)/(?P<id>\d)/$', 'menu.views.tree'),
-* Add to urls.py  url(r'^admin/menu/url-patterns/$', 'menu.views.urls'),
+* Add to urls.py  url(r'^menu/', include('menu.urls')),
 * manage.py syncdb
 * manage.py collectstatic
 
