@@ -2,9 +2,9 @@
 {% block after_field_sets %} 
 <script>
 	(function($) {
-		// /*
+		/* Hide unwanted types of url */
+		/*
 		{% if change %}
-
 			{% if original.url_type == 'external' %}
 				$('.field-content_type').hide();
 				$('.field-object_id').hide();
@@ -32,7 +32,8 @@
 			$('.field-url_patterns').hide();
 			$('.field-url_options').hide();
 		{% endif %}
-		// */
+		*/
+		/* Hide unwanted types of url when type change */
 		$('#id_url_type').change( function() {
 			if ($("#id_url_type option:selected").val() == 'external') {
 				$('.field-url').slideDown();
@@ -42,10 +43,10 @@
 			 	$('.field-url_patterns').slideUp();
 			 	$('.field-url_options').slideUp();
 			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
-			 	$('.field-url_patterns').show();
-			 	$('.field-url_options').show();
+			 	$('.field-url_patterns').slideDown();
+			 	$('.field-url_options').slideDown();
 				
-				$('.field-url').hide();
+				$('.field-url').slideUp();
 				$('.field-content_type').slideUp();
 			 	$('.field-object_id').slideUp();
 			} else if ($("#id_url_type option:selected").val() == 'model-oblect') {

@@ -5,11 +5,18 @@ Best tree menu for Django (1.4+)!
 * Optimization
 
 # I think about
+* migrations
 * Optimization model
 * Optimization templates
+* Add "anonymous only" menu items (Acess users)
+* login_required
+* level
+* rank
 * Help and docs
 * Add FCBKcomplete for MenuGroup in admin interface.
 * WYSIWYG to description
+* https://github.com/jphalip/django-treemenus
+* https://github.com/rossp/django-menu
 
 # How to use
 ## Install

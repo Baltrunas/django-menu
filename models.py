@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 # sites for menu group
 from django.contrib.sites.models import Site
-# for menu to create urls to object of model
+# contenttypes for menu to create urls to object of model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
@@ -21,7 +21,7 @@ class MenuGroup(models.Model):
 
 	# link to items of this menu group
 	def menu(self):
-		return '<a href="../menu/?group__id__exact=%s"><img src="%simg/menu_item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
+		return '<a href="../menu/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
 	menu.allow_tags = True
 
