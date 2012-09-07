@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns
+from django.conf.urls import url
 
 urlpatterns = patterns('menu.views',
     url(r'^url_patterns/$', 'url_patterns', name='menu_url_patterns'),

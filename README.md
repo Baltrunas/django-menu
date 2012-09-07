@@ -11,7 +11,7 @@ Best tree menu for Django (1.4+)!
 * Optimization templates
 * Add "anonymous only" menu items (Acess users)
 * login_required
-* level
+* level!!!!!
 * Help and docs in README.md
 * Add FCBKcomplete for MenuGroup in admin interface.
 * migrations
@@ -35,7 +35,9 @@ Best tree menu for Django (1.4+)!
 # Changelog
 ## 2012.09.07
 ### Add
-* Add menu options for groups and items
+* Add menu attributes for groups and items
+### Fix
+* Change tabs to spaces trying pep-8
 
 ## 2012.07.13
 ### Fix
