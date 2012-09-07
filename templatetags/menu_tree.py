@@ -4,7 +4,7 @@ register = template.Library()
 from menu.models import Menu
 
 @register.simple_tag(takes_context = True)
-def menu_tree(context, group, tpl = 'menu_tree.html', level = 0):
+def menu_tree(context, group, tpl = 'menu/tree.html', level = 0):
 	level += 1
 	t = template.loader.get_template(tpl)
 	if hasattr(group, 'childs'):

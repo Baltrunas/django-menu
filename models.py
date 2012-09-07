@@ -136,9 +136,21 @@ class Menu(models.Model):
 		verbose_name_plural = _('Menus')
 
 class MenuOption(models.Model):
+	menu = models.ForeignKey(Menu, verbose_name=_('Menu'), related_name='options')
+	PLACE_CHOICES = (
+		('ul', 'ul'),
+		('li', 'li'),
+		('a', 'a'),
+		('anchor', _('Anchor')),
+	)
+	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
 	name = models.CharField(verbose_name=_('Name'), max_length=256)
 	value = models.CharField(verbose_name=_('Value'), max_length=256)
-	
+
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
 	def __unicode__(self):
 		return self.name + '=' + self.value
 
@@ -146,3 +158,27 @@ class MenuOption(models.Model):
 		ordering = ['name']
 		verbose_name=_('Menu Option')
 		verbose_name_plural =_('Menu Options')
+
+class MenuGroupOption(models.Model):
+	menu_group = models.ForeignKey(MenuGroup, verbose_name=_('MenuGroup'), related_name='options')
+	PLACE_CHOICES = (
+		('ul', 'ul'),
+		('li', 'li'),
+		('a', 'a'),
+		('anchor', _('Anchor')),
+	)
+	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
+	name = models.CharField(verbose_name=_('Name'), max_length=256)
+	value = models.CharField(verbose_name=_('Value'), max_length=256)
+
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def __unicode__(self):
+		return self.name + '=' + self.value
+
+	class Meta:
+		ordering = ['name']
+		verbose_name=_('Menu Group Option')
+		verbose_name_plural =_('Menu Group Options')
