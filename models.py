@@ -10,7 +10,7 @@ from django.contrib.sites.models import Site
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
-class MenuGroup(models.Model):
+class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
 	description = models.TextField(verbose_name=_('Description'), blank=True)
@@ -21,13 +21,13 @@ class MenuGroup(models.Model):
 
 	# link to items of this menu group
 	def menu(self):
-		return '<a href="../menu/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
+		return '<a href="../item/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
 	menu.allow_tags = True
 
 	# count items of this menu group
 	def count(self):
-		return Menu.objects.filter(group=self.id).count()
+		return Item.objects.filter(group=self.id).count()
 	count.short_description = _('Count')
 
 	def __unicode__(self):
@@ -38,7 +38,7 @@ class MenuGroup(models.Model):
 		verbose_name = _('Menu Group')
 		verbose_name_plural = _('Menu Groups')
 
-class Menu(models.Model):
+class Item (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=255)
 	URL_TYPE_CHOICES = (
 		(_('internal'),
@@ -62,9 +62,9 @@ class Menu(models.Model):
 	content_object = generic.GenericForeignKey('content_type', 'object_id')
 	# for url patterns
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
-	url_options = models.TextField(verbose_name=_('URL Options'), blank=True)
+	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
 	
-	group = models.ForeignKey(MenuGroup, verbose_name=_('Menu Group'))
+	group = models.ForeignKey(Group, verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
 	description = models.TextField(verbose_name=_('Description'), blank=True)
@@ -118,7 +118,7 @@ class Menu(models.Model):
 		self.order = self.order_puth(self)
 		if self.parent:
 			self.group = self.parent.group
-		super(Menu, self).save(*args, **kwargs)
+		super(Item, self).save(*args, **kwargs)
 		for item in self.childs.all():
 			item.save()
 
@@ -135,32 +135,9 @@ class Menu(models.Model):
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
 
-class MenuOption(models.Model):
-	menu = models.ForeignKey(Menu, verbose_name=_('Menu'), related_name='options')
-	PLACE_CHOICES = (
-		('ul', 'ul'),
-		('li', 'li'),
-		('a', 'a'),
-		('anchor', _('Anchor')),
-	)
-	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
-	name = models.CharField(verbose_name=_('Name'), max_length=256)
-	value = models.CharField(verbose_name=_('Value'), max_length=256)
-
-	public = models.BooleanField(verbose_name=_('Public'), default=True)
-	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
-	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
-
-	def __unicode__(self):
-		return self.name + '=' + self.value
-
-	class Meta:
-		ordering = ['name']
-		verbose_name=_('Menu Option')
-		verbose_name_plural =_('Menu Options')
-
-class MenuGroupOption(models.Model):
-	menu_group = models.ForeignKey(MenuGroup, verbose_name=_('MenuGroup'), related_name='options')
+# Attribute
+class GroupAttribute(models.Model):
+	group = models.ForeignKey(Group, verbose_name=_('Menu Group'), related_name='options')
 	PLACE_CHOICES = (
 		('ul', 'ul'),
 		('li', 'li'),
@@ -182,3 +159,27 @@ class MenuGroupOption(models.Model):
 		ordering = ['name']
 		verbose_name=_('Menu Group Option')
 		verbose_name_plural =_('Menu Group Options')
+
+class ItemAttribute (models.Model):
+	item = models.ForeignKey(Item, verbose_name=_('Menu Item'), related_name='options')
+	PLACE_CHOICES = (
+		('ul', 'ul'),
+		('li', 'li'),
+		('a', 'a'),
+		('anchor', _('Anchor')),
+	)
+	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
+	name = models.CharField(verbose_name=_('Name'), max_length=256)
+	value = models.CharField(verbose_name=_('Value'), max_length=256)
+
+	public = models.BooleanField(verbose_name=_('Public'), default=True)
+	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
+	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
+
+	def __unicode__(self):
+		return self.name + '=' + self.value
+
+	class Meta:
+		ordering = ['name']
+		verbose_name=_('Menu Option')
+		verbose_name_plural =_('Menu Options')

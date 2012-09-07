@@ -15,5 +15,5 @@ class SimpleTest(TestCase):
 		"""
 		self.assertEqual(1 + 1, 2)
 
-class HelloTestCase(TestCase):
-	fixtures = ['test_data.json']
+# class HelloTestCase(TestCase):
+# 	fixtures = ['test_data.json']
