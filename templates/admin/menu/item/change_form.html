@@ -64,8 +64,20 @@
 			 	$('.field-url_options').slideUp();
 			}
 		});
-
 		$('#id_url_type').change();
+
+		/* Hide users and groups if access don't need */
+		$('#id_access').change( function() {
+			var access = $("#id_access option:selected").val();
+			if ((access == '4') || (access == '5')) {
+				$('.field-access_group').slideDown();
+				$('.field-access_user').slideDown();
+			} else {
+				$('.field-access_group').slideUp();
+				$('.field-access_user').slideUp();
+			}
+		});
+		$('#id_access').change();
 		
 		/* Load url patterns list */
 		var url_patterns = $("#id_url_patterns").val();

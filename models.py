@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*
-from django.db import models
 # ugettext_lazy for translation
 from django.utils.translation import ugettext_lazy as _
 # settings for image puth
@@ -9,6 +8,10 @@ from django.contrib.sites.models import Site
 # contenttypes for menu to create urls to object of model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+# for access control
+from django.contrib.auth import models as Auth
+# django ORM
+from django.db import models
 
 
 class Group (models.Model):
@@ -72,6 +75,21 @@ class Item (models.Model):
     description = models.TextField(verbose_name=_('Description'), blank=True)
     sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
     order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
+
+    ACCESS_CHOICES = (
+        (0, _('All')),
+        (1, _('Anonymous only')),
+        (2, _('Login required')),
+        (4, _('Except')),
+        (5, _('Only')),
+        (9, _('Super Admin')),
+    )
+    access = models.PositiveSmallIntegerField(verbose_name=_('Access'), max_length=1, choices=ACCESS_CHOICES)
+    access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Auth Group'), related_name='menus', null=True, blank=True)
+    access_user = models.ManyToManyField(Auth.User, verbose_name=_('Auth User'), related_name='menus', null=True, blank=True)
+
+    level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
+
     public = models.BooleanField(verbose_name=_('Public'), default=True)
     created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
