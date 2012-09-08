@@ -15,11 +15,14 @@ Best tree menu for Django (1.4+)!
 {% menu_tree 'main_menu' %}
 
 # Futures
-* models :24 puth mast be
 * views auto puth to template
 * Configurate access
 * Configurate level
-* Optimization
+* Optimization admin_menu_tree
+* Optimization menu_tree
+* Optimization urls
+* Optimization views
+* Optimization models :24 puth mast be
 * Fixtures
 * New translations
 * setup.py
@@ -55,6 +58,8 @@ def save(self, force_insert=False, force_update=False):
 ### Add
 * Access to model
 * Level to model
+### Fix
+* Optimization admin
 
 ## 2012.09.07
 ### Add
