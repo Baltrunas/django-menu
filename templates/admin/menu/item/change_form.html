@@ -35,21 +35,22 @@
 		*/
 		/* Hide unwanted types of url when type change */
 		$('#id_url_type').change( function() {
-			if ($("#id_url_type option:selected").val() == 'external') {
+			var url_type = $("#id_url_type option:selected").val();
+			if (url_type == 'external') {
 				$('.field-url').slideDown();
 				
 				$('.field-content_type').slideUp();
 				$('.field-object_id').slideUp();
 			 	$('.field-url_patterns').slideUp();
 			 	$('.field-url_options').slideUp();
-			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
+			} else if (url_type == 'url-patterns') {
 			 	$('.field-url_patterns').slideDown();
 			 	$('.field-url_options').slideDown();
 				
 				$('.field-url').slideUp();
 				$('.field-content_type').slideUp();
 			 	$('.field-object_id').slideUp();
-			} else if ($("#id_url_type option:selected").val() == 'model-oblect') {
+			} else if (url_type == 'model-oblect') {
 				$('.field-content_type').slideDown();
 				$('.field-object_id').slideDown();
 				
