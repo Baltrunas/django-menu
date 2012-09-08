@@ -28,7 +28,7 @@ class ItemAttributeInline(admin.StackedInline):
 
 
 class ItemAdmin(admin.ModelAdmin):
-	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'icon_preview', 'access')
+	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('public', 'sort')
 	list_filter = ('public', 'group', 'access')
