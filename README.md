@@ -14,24 +14,41 @@ Best tree menu for Django (1.4+)!
 {% load menu_tree %}
 {% menu_tree 'main_menu' %}
 
-
 # Futures
-* Optimization
 * models :24 puth mast be
 * views auto puth to template
 * Configurate access
 * Configurate level
+* Optimization
+* Fixtures
+* New translations
+* setup.py
 * Docs
 * README.md
-* Optimization model
-* Optimization templates
 
 # I think about
 * Add FCBKcomplete for MenuGroup in admin interface.
 * migrations
 * https://github.com/jphalip/django-treemenus
-* https://github.com/rossp/django-menu
-* setup.py
+
+<!-- 
+https://github.com/rossp/django-menu
+def save(self, force_insert=False, force_update=False):
+    """
+    Re-order all items from 10 upwards, at intervals of 10.
+    This makes it easy to insert new items in the middle of 
+    existing items without having to manually shuffle 
+    them all around.
+    """
+    super(Menu, self).save(force_insert, force_update)
+        
+    current = 10
+    for item in MenuItem.objects.filter(menu=self).order_by('order'):
+        item.order = current
+        item.save()
+        current += 10
+ (Also see templatetags / menubuilder.py)
+ -->
 
 # Changelog
 ## 2012.09.08
