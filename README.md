@@ -1,41 +1,85 @@
 # django-menu
 Best tree menu for Django (1.4+)
 
-# Futures
-* Optimization
-* models :24 puth mast be
-* views auto puth to template
-
-# I think about
-* Optimization model
-* Optimization templates
-* Add "anonymous only" menu items (Acess users)
-* login_required
-* level
-* Help and docs in README.md
-* Add FCBKcomplete for MenuGroup in admin interface.
-* migrations
-* https://github.com/jphalip/django-treemenus
-* https://github.com/rossp/django-menu
-
-
 # How to use
 ## Install
 * Add to INSTALLED_APPS 'menu'
-* Add to urls.py  url(r'^menu/', include('menu.urls')),
+* Add to urls.py  url(r'^admin_tree_menu/', include('menu.urls')),
 * Add to TEMPLATE_CONTEXT_PROCESSORS 'django.core.context_processors.request',
 * manage.py syncdb
 * manage.py collectstatic
+	# RECOMENDATION to detect this URL
+	# import
+	from django.template import RequestContext
+	# and view 
+	return render_to_response('main.html', context, context_instance=RequestContext(request))
 
 ## Use
 ### In template:
 {% load menu_tree %}
 {% menu_tree 'main_menu' %}
 
+# Futures
+* views
+* url_patterns
+* tree
+* admin_menu_tree
+* change_form
+* Configurate access
+* Configurate level
+* Optimization admin_menu_tree
+* Optimization menu_tree
+* Optimization views :auto puth to template
+* Optimization models :24 puth mast be
+* Fixtures
+* New translations
+* setup.py
+* Docs
+* README.md
+
+# I think about
+* Add FCBKcomplete for MenuGroup in admin interface.
+* migrations
+* https://github.com/jphalip/django-treemenus
+<!-- 
+	https://github.com/rossp/django-menu
+	def save(self, force_insert=False, force_update=False):
+		"""
+		Re-order all items from 10 upwards, at intervals of 10.
+		This makes it easy to insert new items in the middle of 
+		existing items without having to manually shuffle 
+		them all around.
+		"""
+		super(Menu, self).save(force_insert, force_update)
+			
+		current = 10
+		for item in MenuItem.objects.filter(menu=self).order_by('order'):
+			item.order = current
+			item.save()
+			current += 10
+	 (Also see templatetags / menubuilder.py)
+ -->
+
 # Changelog
+## 2012.09.09
+### Add
+* Template filter to compare current url and menu item url
+### Fix
+* Ajax in the admin does not depend on the URL prefix
+* Optimization urls.py
+
+## 2012.09.08
+### Add
+* Access to model
+* Level to model
+### Fix
+* Optimization admin
+
 ## 2012.09.07
 ### Add
-* Add menu options for groups and items
+* Add menu attributes for groups and items
+### Fix
+* Change tabs to spaces trying pep-8
 
 ## 2012.07.13
 ### Fix

@@ -1,16 +1,10 @@
 {% load menu_tree %}
+{% load is_current %}
 {% spaceless %}
 {% if menu %}
 	<ul id='{{menu.0.group.slug}}' class='level-{{level}}'>
 		{% for item in menu %}
-			<li id='{{item.group.slug}}-item-{{item.id}}'
-				{% if item.get_absolute_url == url %}
-					class='this'
-				{% elif item.get_absolute_url != '/' and item.get_absolute_url in url %}
-					class='this'
-				{% endif %}
-			>
-				
+			<li id='{{item.group.slug}}-item-{{item.id}}' class='{{ item|is_current:url }}'>
 				<a href='{{item.get_absolute_url}}'>
 					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
 					{{item.name}}
@@ -24,13 +18,7 @@
 {% else %}
 	<ul id='{{childs.0.group.slug}}-childs-{{childs.0.parent.id}}' class='level-{{level}}'>
 		{% for item in childs %}
-			<li id='{{item.group.slug}}-item-{{item.id}}'
-				{% if item.get_absolute_url == url %}
-					class='this'
-				{% elif item.get_absolute_url != '/' and item.get_absolute_url in url %}
-					class='this'
-				{% endif %}
-			>
+			<li id='{{item.group.slug}}-item-{{item.id}}' class='{{ item|is_current:url }}'>
 				<a href="{{ item.get_absolute_url }}">
 					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
 					{{ item.name }}

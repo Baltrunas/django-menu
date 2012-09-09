@@ -35,21 +35,22 @@
 		*/
 		/* Hide unwanted types of url when type change */
 		$('#id_url_type').change( function() {
-			if ($("#id_url_type option:selected").val() == 'external') {
+			var url_type = $("#id_url_type option:selected").val();
+			if (url_type == 'external') {
 				$('.field-url').slideDown();
 				
 				$('.field-content_type').slideUp();
 				$('.field-object_id').slideUp();
 			 	$('.field-url_patterns').slideUp();
 			 	$('.field-url_options').slideUp();
-			} else if ($("#id_url_type option:selected").val() == 'url-patterns') {
+			} else if (url_type == 'url-patterns') {
 			 	$('.field-url_patterns').slideDown();
 			 	$('.field-url_options').slideDown();
 				
 				$('.field-url').slideUp();
 				$('.field-content_type').slideUp();
 			 	$('.field-object_id').slideUp();
-			} else if ($("#id_url_type option:selected").val() == 'model-oblect') {
+			} else if (url_type == 'model-oblect') {
 				$('.field-content_type').slideDown();
 				$('.field-object_id').slideDown();
 				
@@ -64,8 +65,21 @@
 			 	$('.field-url_options').slideUp();
 			}
 		});
-
 		$('#id_url_type').change();
+
+		/* Hide users and groups if access don't need */
+		$('#id_access').change( function() {
+			var access = $("#id_access option:selected").val();
+			if ((access == '4') || (access == '5')) {
+				$('.field-access_group').slideDown();
+				$('.field-access_user').slideDown();
+			} else {
+				$('.field-access_group').slideUp();
+				$('.field-access_user').slideUp();
+			}
+		});
+		$('#id_access').change();
+
 		
 		/* Load url patterns list */
 		var url_patterns = $("#id_url_patterns").val();
@@ -76,7 +90,7 @@
 		});
 		//*
 		{% if change %}
-			$("#id_parent").load("{% url menu_tree group_id=original.group.id id=original.id %}", function() {
+			$("#id_parent").load("{% url menu_parent_tree group_id=original.group.id id=original.id %}", function() {
 				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
 			});			
 		{% else %} 
@@ -87,7 +101,14 @@
 			if ($("#id_group option:selected").val() == '') {
 				$("#id_parent").empty();
 			} else {
-				$("#id_parent").load("/menu/tree/" + $("#id_group option:selected").val() + "/{% if change %}{{ original.id }}{% else %}0{% endif %}/");
+				var group_id = $("#id_group option:selected").val();
+				var original_id = {% if change %}{{ original.id }}{% else %}0{% endif %};
+				var menu_parent_tree = '{% url menu_parent_tree_url_pattern %}'
+					.replace(/group_id/ig, group_id)
+					.replace(/original_id/ig, original_id);
+				$("#id_parent").load(menu_parent_tree, function(){
+					$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
+				});
 			}
 		});
 		$('#id_group').change();

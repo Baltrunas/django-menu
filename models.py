@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*
-from django.db import models
 # ugettext_lazy for translation
 from django.utils.translation import ugettext_lazy as _
 # settings for image puth
@@ -9,6 +8,11 @@ from django.contrib.sites.models import Site
 # contenttypes for menu to create urls to object of model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+# for access control
+from django.contrib.auth import models as Auth
+# django ORM
+from django.db import models
+
 
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
@@ -38,6 +42,7 @@ class Group (models.Model):
 		verbose_name = _('Menu Group')
 		verbose_name_plural = _('Menu Groups')
 
+
 class Item (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=255)
 	URL_TYPE_CHOICES = (
@@ -47,8 +52,8 @@ class Item (models.Model):
 				('url-patterns', _('url patterns')),
 			)
 		),
-		(_('external'), 
-			( 
+		(_('external'),
+			(
 				('external', _('external')),
 			)
 		),
@@ -63,13 +68,28 @@ class Item (models.Model):
 	# for url patterns
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
-	
+
 	group = models.ForeignKey(Group, verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
 	description = models.TextField(verbose_name=_('Description'), blank=True)
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
+
+	ACCESS_CHOICES = (
+		(0, _('All')),
+		(1, _('Anonymous only')),
+		(2, _('Login required')),
+		(4, _('Except')),
+		(5, _('Only')),
+		(9, _('Super Admin')),
+	)
+	access = models.PositiveSmallIntegerField(verbose_name=_('Access'), max_length=1, choices=ACCESS_CHOICES)
+	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Auth Group'), related_name='menus', null=True, blank=True)
+	access_user = models.ManyToManyField(Auth.User, verbose_name=_('Auth User'), related_name='menus', null=True, blank=True)
+
+	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
+
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -98,7 +118,7 @@ class Item (models.Model):
 			return self.create_url()
 		else:
 			return self.url
-	
+
 	def icon_preview(self):
 		if self.icon:
 			return '<img src="%s">' % self.icon.url
@@ -107,7 +127,7 @@ class Item (models.Model):
 	icon_preview.short_description = _('Icon')
 	icon_preview.allow_tags = True
 
-	def order_puth (self, this):
+	def order_puth(self, this):
 		puth = str(this.sort) + ':' + this.name.replace('|', '')
 		if this.parent:
 			return self.order_puth(this.parent) + '|' + puth
@@ -122,8 +142,16 @@ class Item (models.Model):
 		for item in self.childs.all():
 			item.save()
 
+	def is_current(self, url):
+		self_url = self.get_absolute_url()
+		if self_url == url:
+			return 'current'
+		elif self_url != '/' and self_url in url:
+			return 'parent_of_current'
+		return ''
+
 	def display(self):
-		return '&nbsp;' * (len(self.order.split('|')) -1) * 8 + self.name
+		return '&nbsp;' * (len(self.order.split('|')) - 1) * 8 + self.name
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
@@ -135,7 +163,7 @@ class Item (models.Model):
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
 
-# Attribute
+
 class GroupAttribute(models.Model):
 	group = models.ForeignKey(Group, verbose_name=_('Menu Group'), related_name='options')
 	PLACE_CHOICES = (
@@ -157,8 +185,9 @@ class GroupAttribute(models.Model):
 
 	class Meta:
 		ordering = ['name']
-		verbose_name=_('Menu Group Option')
-		verbose_name_plural =_('Menu Group Options')
+		verbose_name = _('Menu Group Option')
+		verbose_name_plural = _('Menu Group Options')
+
 
 class ItemAttribute (models.Model):
 	item = models.ForeignKey(Item, verbose_name=_('Menu Item'), related_name='options')
@@ -181,5 +210,5 @@ class ItemAttribute (models.Model):
 
 	class Meta:
 		ordering = ['name']
-		verbose_name=_('Menu Option')
-		verbose_name_plural =_('Menu Options')
+		verbose_name = _('Menu Option')
+		verbose_name_plural = _('Menu Options')
