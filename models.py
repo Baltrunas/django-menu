@@ -142,6 +142,14 @@ class Item (models.Model):
 		for item in self.childs.all():
 			item.save()
 
+	def is_current(self, url):
+		self_url = self.get_absolute_url()
+		if self_url == url:
+			return 'current'
+		elif self_url != '/' and self_url in url:
+			return 'parent_of_current'
+		return ''
+
 	def display(self):
 		return '&nbsp;' * (len(self.order.split('|')) - 1) * 8 + self.name
 	display.short_description = _('Menu')
