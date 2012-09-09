@@ -1,5 +1,5 @@
 # django-menu
-Best tree menu for Django (1.4+)!
+Best tree menu for Django (1.4+)
 
 # Futures
 * Optimization
