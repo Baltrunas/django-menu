@@ -20,11 +20,11 @@ Best tree menu for Django (1.4+)
 {% menu_tree 'main_menu' %}
 
 # Futures
-* views
-* url_patterns
-* tree
-* admin_menu_tree
-* change_form
+* views.py
+* admin_url_patterns.html
+* admin_tree.html
+* admin_menu_tree.py
+* change_form.html
 * Configurate access
 * Configurate level
 * Optimization admin_menu_tree
