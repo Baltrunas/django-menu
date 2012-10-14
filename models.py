@@ -23,13 +23,13 @@ class Group (models.Model):
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	# link to items of this group
+	# Link to items of this group
 	def menu(self):
 		return '<a href="../item/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
 	menu.allow_tags = True
 
-	# count items of this menu group
+	# Count of items in this group
 	def count(self):
 		return self.items.count()
 	count.short_description = _('Count')
@@ -136,6 +136,7 @@ class Item (models.Model):
 
 	def save(self, *args, **kwargs):
 		self.order = self.order_puth(self)
+		self.level = len(self.order.split('|')) - 1
 		if self.parent:
 			self.group = self.parent.group
 		super(Item, self).save(*args, **kwargs)
@@ -151,7 +152,7 @@ class Item (models.Model):
 		return ''
 
 	def display(self):
-		return '&nbsp;' * (len(self.order.split('|')) - 1) * 8 + self.name
+		return '&nbsp;' * self.level * 8 + self.name
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
