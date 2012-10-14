@@ -1,4 +1,4 @@
-# django-menu
+# django-menu v4.0
 Best tree menu for Django (1.4+)
 
 # How to use
