@@ -23,7 +23,7 @@ class Group (models.Model):
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	# link to items of this menu group
+	# link to items of this group
 	def menu(self):
 		return '<a href="../item/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
@@ -31,7 +31,7 @@ class Group (models.Model):
 
 	# count items of this menu group
 	def count(self):
-		return Item.objects.filter(group=self.id).count()
+		return self.items.count()
 	count.short_description = _('Count')
 
 	def __unicode__(self):
@@ -69,7 +69,7 @@ class Item (models.Model):
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
 
-	group = models.ForeignKey(Group, verbose_name=_('Menu Group'))
+	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
 	description = models.TextField(verbose_name=_('Description'), blank=True)
