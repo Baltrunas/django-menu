@@ -2,37 +2,6 @@
 {% block after_field_sets %} 
 <script>
 	(function($) {
-		/* Hide unwanted types of url */
-		/*
-		{% if change %}
-			{% if original.url_type == 'external' %}
-				$('.field-content_type').hide();
-				$('.field-object_id').hide();
-			 	$('.field-url_patterns').hide();
-			 	$('.field-url_options').hide();
-			{% elif original.url_type == 'url-patterns' %}
-				$('.field-content_type').hide();
-				$('.field-object_id').hide();
-				$('.field-url').hide();
-			{% elif original.url_type == 'model-oblect' %}
-				$('.field-url').hide();
-			 	$('.field-url_patterns').hide();
-			 	$('.field-url_options').hide();
-			{% else %}
-				$('.field-content_type').hide();
-				$('.field-object_id').hide();
-				$('.field-url').hide();
-			 	$('.field-url_patterns').hide();
-			 	$('.field-url_options').hide();
-			{% endif %}
-		{% else %} 
-			$('.field-url').hide();
-			$('.field-content_type').hide();
-			$('.field-object_id').hide();
-			$('.field-url_patterns').hide();
-			$('.field-url_options').hide();
-		{% endif %}
-		*/
 		/* Hide unwanted types of url when type change */
 		$('#id_url_type').change( function() {
 			var url_type = $("#id_url_type option:selected").val();

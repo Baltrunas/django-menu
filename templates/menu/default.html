@@ -2,7 +2,13 @@
 {% load is_current %}
 {% spaceless %}
 {% if menu %}
-	<ul id='{{menu.0.group.slug}}' class='level-{{level}}'>
+	<ul id='{{menu.0.group.slug}}' class='level-{{level}}'
+		{% for attr in menu.0.group.options.all %}
+			{% if attr.place = 'ul' and attr.public %}
+				{{attr.name}}='{{attr.value}}'
+			{% endif %}
+		{% endfor %}
+	>
 		{% for item in menu %}
 			<li id='{{item.group.slug}}-item-{{item.id}}' class='{{ item|is_current:url }}'>
 				<a href='{{item.get_absolute_url}}'>
