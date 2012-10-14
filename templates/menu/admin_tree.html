@@ -9,9 +9,9 @@
 	{% endfor %}
 {% else %}
 	{% for item in childs %}
-		<option value='{{item.id}}'>{% for i in level_loop %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endfor %}{{item.name}}</option>
+		<option value='{{item.id}}'>{{item.display|safe}}</option>
 		{% if item.childs.count > 0 %}
-			{% admin_menu_tree item id level %}
+			{% admin_menu_tree item id %}
 		{% endif %}
 	{% endfor %}
 {% endif %}
