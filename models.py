@@ -87,6 +87,9 @@ class Item (TranslatableModel):
 		(2, _('Login required')),
 		(4, _('Except')),
 		(5, _('Only')),
+		# Активный
+		# Статус персонала
+		# Статус суперпользователя
 		(9, _('Super Admin')),
 	)
 	access = models.PositiveSmallIntegerField(verbose_name=_('Access'), max_length=1, choices=ACCESS_CHOICES)

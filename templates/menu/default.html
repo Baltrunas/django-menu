@@ -23,7 +23,9 @@
 	</ul>
 {% else %}
 	<ul id='{{childs.0.group.slug}}-childs-{{childs.0.parent.id}}' class='level-{{level}}'>
+		{# {{item}} #}
 		{% for item in childs %}
+		{{item.public}}
 			<li id='{{item.group.slug}}-item-{{item.id}}' class='{{ item|is_current:url }}'>
 				<a href="{{ item.get_absolute_url }}">
 					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
