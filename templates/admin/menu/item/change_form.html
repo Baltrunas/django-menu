@@ -81,9 +81,13 @@
 			}
 		});
 		$('#id_group').change();
+
+		$('fieldset.module.aligned').prepend($('.field-description'));
+		$('fieldset.module.aligned').prepend($('.field-name'));
 	})(django.jQuery);
 </script>
 <style>
+	.field-name, .field-description {background: #dfd;}
 	select, input {width: 25em!important;}
 	input.vIntegerField {width: 10em!important;}
 	input[type=checkbox] {width: 20px!important;}

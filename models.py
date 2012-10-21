@@ -12,6 +12,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
+from hvad.models import TranslatableModel, TranslatedFields
 
 
 class Group (models.Model):
@@ -43,8 +44,12 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (models.Model):
-	name = models.CharField(verbose_name=_('Name'), max_length=255)
+class Item (TranslatableModel):
+	translations = TranslatedFields(
+		name=models.CharField(verbose_name=_('Name'), max_length=255),
+		description=models.TextField(verbose_name=_('Description'), blank=True)
+	)
+
 	URL_TYPE_CHOICES = (
 		(_('internal'),
 			(
@@ -72,7 +77,7 @@ class Item (models.Model):
 	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
-	description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 
@@ -128,13 +133,15 @@ class Item (models.Model):
 	icon_preview.allow_tags = True
 
 	def order_puth(self, this):
-		puth = str(this.sort) + ':' + this.name.replace('|', '')
+		puth = str(this.sort) + ':' + str(this.pk)
+		# puth = str(this.sort) + ':' + this.name.replace('|', '')
 		if this.parent:
 			return self.order_puth(this.parent) + '|' + puth
 		else:
 			return puth
 
 	def save(self, *args, **kwargs):
+		obj = super(Item, self).save(*args, **kwargs)
 		self.order = self.order_puth(self)
 		self.level = len(self.order.split('|')) - 1
 		if self.parent:
@@ -142,6 +149,7 @@ class Item (models.Model):
 		super(Item, self).save(*args, **kwargs)
 		for item in self.childs.all():
 			item.save()
+		return obj
 
 	def is_current(self, url):
 		self_url = self.get_absolute_url()
@@ -156,11 +164,19 @@ class Item (models.Model):
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
-	def __unicode__(self):
-		return self.name
+	# def __unicode__(self, *args, **kwargs):
+		# super(Item, self).save(*args, **kwargs)
+		# self.order = self.order_puth(self)
+		# self.level = len(self.order.split('|')) - 1
+		# if self.parent:
+		# 	self.group = self.parent.group
+		# super(Item, self).save(*args, **kwargs)
+		# for item in self.childs.all():
+		# 	item.save()
+		# return self.name
 
 	class Meta:
-		ordering = ['order', 'sort', 'name']
+		ordering = ['order', 'sort']
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
 
