@@ -94,16 +94,16 @@ class Item (models.Model):
 		(2, _('No')),
 	)
 
-	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
 
 	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', null=True, blank=True)
 	access_denied_user = models.ManyToManyField(Auth.User, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
 
-	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
 
 	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
 
