@@ -40,6 +40,16 @@
 		$('#id_access').change( function() {
 			var access = $("#id_access option:selected").val();
 			if ((access == 'exclude') || (access == 'filter')) {
+				$('.field-access_is_active').slideUp();
+				$('.field-access_is_staff').slideUp();
+				$('.field-access_is_superuser').slideUp();
+
+				$('.field-access_denied_group').slideUp();
+				$('.field-access_denied_user').slideUp();
+				$('.field-access_denied_is_active').slideUp();
+				$('.field-access_denied_is_staff').slideUp();
+				$('.field-access_denied_is_superuser').slideUp();
+
 				$('.field-access_group').slideDown();
 				$('.field-access_user').slideDown();
 			} else if (access == 'advanced_access') {
