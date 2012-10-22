@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
-from hvad.admin import TranslatableAdmin
+
 from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
@@ -27,10 +27,10 @@ class ItemAttributeInline(admin.StackedInline):
 	extra = 0
 
 
-class ItemAdmin(TranslatableAdmin):
+class ItemAdmin(admin.ModelAdmin):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
-	list_editable = ('sort',)
+	list_editable = ('public', 'sort')
 	list_filter = ('public', 'group', 'access')
 	inlines = [ItemAttributeInline]
 
