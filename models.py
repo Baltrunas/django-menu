@@ -12,7 +12,15 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
-from hvad.models import TranslatableModel, TranslatedFields
+
+from menu.settings import hvad
+
+
+if hvad:
+	from hvad.models import TranslatableModel, TranslatedFields
+	TranslatableModel = TranslatableModel
+else:
+	TranslatableModel = models.Model
 
 
 class Group (models.Model):
@@ -45,10 +53,14 @@ class Group (models.Model):
 
 
 class Item (TranslatableModel):
-	translations = TranslatedFields(
-		name=models.CharField(verbose_name=_('Name'), max_length=255),
-		description=models.TextField(verbose_name=_('Description'), blank=True)
-	)
+	if hvad:
+		translations = TranslatedFields(
+			name=models.CharField(verbose_name=_('Name'), max_length=255),
+			description=models.TextField(verbose_name=_('Description'), blank=True)
+		)
+	else:
+		name = models.CharField(verbose_name=_('Name'), max_length=255)
+		description = models.TextField(verbose_name=_('Description'), blank=True)
 
 	URL_TYPE_CHOICES = (
 		(_('internal'),
@@ -182,7 +194,10 @@ class Item (TranslatableModel):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		return self.name
+		if hvad:
+			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
+		else:
+			return self.name
 
 	class Meta:
 		ordering = ['order', 'sort']
