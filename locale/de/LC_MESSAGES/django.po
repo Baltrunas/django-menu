@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-22 18:10+0400\n"
+"POT-Creation-Date: 2012-10-22 18:11+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,78 +16,77 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: models.py:19 models.py:49 models.py:202 models.py:227
 msgid "Name"
-msgstr "Имя"
+msgstr "Name"
 
 #: models.py:20
 msgid "Slug"
-msgstr "Ярлык"
+msgstr ""
 
 #: models.py:20
 msgid ""
 "A slug is the part of a URL which identifies a page using human-readable "
 "keywords"
 msgstr ""
-"«Ярлык» — это вариант названия, подходящий для URL. Обычно содержит только "
-"латинские буквы в нижнем регистре, цифры и дефисы."
 
 #: models.py:21 models.py:50
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: models.py:22
 msgid "Sites"
-msgstr "Сайты"
+msgstr "Seiten"
 
 #: models.py:23 models.py:115 models.py:205 models.py:230
 msgid "Public"
-msgstr "Публикация"
+msgstr "Veröffentlichen"
 
 #: models.py:24 models.py:116 models.py:206 models.py:231
 msgid "Created At"
-msgstr "Создано"
+msgstr "erstellt am"
 
 #: models.py:25 models.py:117 models.py:207 models.py:232
 msgid "Updated At"
-msgstr "Обновлено"
+msgstr "aktualisiert am"
 
 #: models.py:30 models.py:181 models.py:189
 msgid "Menu"
-msgstr "Меню"
+msgstr "Menü"
 
 #: models.py:36
 msgid "Count"
-msgstr "Количество"
+msgstr ""
 
 #: models.py:43 models.py:77 models.py:194
 msgid "Menu Group"
-msgstr "Группу меню"
+msgstr "Menü gruppe"
 
 #: models.py:44
 msgid "Menu Groups"
-msgstr "Группы меню"
+msgstr "Menü gruppen"
 
 #: models.py:54
 msgid "internal"
-msgstr "Внутренний"
+msgstr "intern"
 
 #: models.py:56
 msgid "model oblect"
-msgstr "Объект модели"
+msgstr "Objektmodell"
 
 #: models.py:57 models.py:74
 msgid "url patterns"
-msgstr "Шаблоны URL"
+msgstr "url"
 
 #: models.py:60 models.py:62
 msgid "external"
-msgstr "Внешний"
+msgstr "extern"
 
 #: models.py:66
 msgid "URL Type"
-msgstr "Тип URL"
+msgstr "URL Typ"
 
 #: models.py:68
 msgid "URL"
@@ -94,80 +94,79 @@ msgstr "URL"
 
 #: models.py:70
 msgid "Content Type"
-msgstr "Тип контента"
+msgstr "Inhalt Typ"
 
 #: models.py:71
 msgid "Object ID"
-msgstr "ID Объекта"
+msgstr "Objekt ID"
 
 #: models.py:75
 msgid "URL Options"
-msgstr "Опции URL"
+msgstr "URL Option"
 
 #: models.py:78
 msgid "Parent"
-msgstr "Родитель"
+msgstr "Parent"
 
 #: models.py:79 models.py:149
 msgid "Icon"
-msgstr "Иконка"
+msgstr "Bild"
 
 #: models.py:81
 msgid "Sort"
-msgstr "Сортировка"
+msgstr "Sortieren"
 
 #: models.py:82
 msgid "Order"
-msgstr "Порядок"
+msgstr "ordnen"
 
 #: models.py:85 models.py:97
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: models.py:86
 msgid "Anonymous only"
-msgstr ""
+msgstr "nur unbekannte"
 
 #: models.py:87
 msgid "Login required"
-msgstr ""
+msgstr "für registrierte"
 
 #: models.py:88
 msgid "Except"
-msgstr ""
+msgstr "akzeptieren"
 
 #: models.py:89
 msgid "Only"
-msgstr ""
+msgstr "nur"
 
 #: models.py:90
 msgid "Advanced Access"
-msgstr ""
+msgstr "erweite"
 
 #: models.py:92
 msgid "Access"
-msgstr ""
+msgstr "Zugang"
 
 #: models.py:93
-#, fuzzy
 msgid "Access Group"
-msgstr "Группу меню"
+msgstr "Zugangsgruppe"
 
 #: models.py:94
-msgid "Access User"
+msgid "User Zugang"
 msgstr ""
 
 #: models.py:98
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: models.py:99
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: models.py:102 models.py:109
 msgid "Is active"
-msgstr ""
+msgstr "Aktiv"
 
 #: models.py:103 models.py:110
 msgid "Is staff"
@@ -178,9 +177,8 @@ msgid "Is superuser"
 msgstr ""
 
 #: models.py:106
-#, fuzzy
 msgid "Denied Group"
-msgstr "Группу меню"
+msgstr ""
 
 #: models.py:107
 msgid "Denied User"
@@ -192,43 +190,32 @@ msgstr ""
 
 #: models.py:190
 msgid "Menus"
-msgstr "Меню"
+msgstr "Menü"
 
 #: models.py:199 models.py:224
 msgid "Anchor"
-msgstr ""
+msgstr "Anker"
 
 #: models.py:203 models.py:228
 msgid "Value"
 msgstr ""
 
 #: models.py:214
-#, fuzzy
 msgid "Menu Group Option"
-msgstr "Группу меню"
+msgstr ""
 
 #: models.py:215
-#, fuzzy
 msgid "Menu Group Options"
-msgstr "Группы меню"
+msgstr ""
 
 #: models.py:219
-#, fuzzy
 msgid "Menu Item"
-msgstr "Меню"
+msgstr ""
 
 #: models.py:239
-#, fuzzy
 msgid "Menu Option"
-msgstr "Опции URL"
+msgstr ""
 
 #: models.py:240
-#, fuzzy
 msgid "Menu Options"
-msgstr "Опции URL"
-
-#~ msgid "Text"
-#~ msgstr "Текст"
-
-#~ msgid "urls"
-#~ msgstr "URLs"
+msgstr ""
