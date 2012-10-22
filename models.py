@@ -82,19 +82,33 @@ class Item (TranslatableModel):
 	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 
 	ACCESS_CHOICES = (
-		(0, _('All')),
-		(1, _('Anonymous only')),
-		(2, _('Login required')),
-		(4, _('Except')),
-		(5, _('Only')),
-		# Активный
-		# Статус персонала
-		# Статус суперпользователя
-		(9, _('Super Admin')),
+		('all', _('All')),
+		('anonymous_only', _('Anonymous only')),
+		('login_required', _('Login required')),
+		('exclude', _('Except')),
+		('filter', _('Only')),
+		('advanced_access', _('Advanced Access')),
 	)
-	access = models.PositiveSmallIntegerField(verbose_name=_('Access'), max_length=1, choices=ACCESS_CHOICES)
-	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Auth Group'), related_name='menus', null=True, blank=True)
-	access_user = models.ManyToManyField(Auth.User, verbose_name=_('Auth User'), related_name='menus', null=True, blank=True)
+	access = models.CharField(verbose_name=_('Access'), max_length=32, choices=ACCESS_CHOICES, default='all')
+	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Access Group'), related_name='menus', null=True, blank=True)
+	access_user = models.ManyToManyField(Auth.User, verbose_name=_('Access User'), related_name='menus', null=True, blank=True)
+
+	BOOL_CHOICES = (
+		(0, _('All')),
+		(1, _('Yes')),
+		(2, _('No')),
+	)
+
+	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+
+	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', null=True, blank=True)
+	access_denied_user = models.ManyToManyField(Auth.User, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
+
+	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
 
 	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
 
@@ -167,16 +181,8 @@ class Item (TranslatableModel):
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
-	# def __unicode__(self, *args, **kwargs):
-		# super(Item, self).save(*args, **kwargs)
-		# self.order = self.order_puth(self)
-		# self.level = len(self.order.split('|')) - 1
-		# if self.parent:
-		# 	self.group = self.parent.group
-		# super(Item, self).save(*args, **kwargs)
-		# for item in self.childs.all():
-		# 	item.save()
-		# return self.name
+	def __unicode__(self, *args, **kwargs):
+		return self.name
 
 	class Meta:
 		ordering = ['order', 'sort']
