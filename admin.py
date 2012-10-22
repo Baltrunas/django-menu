@@ -5,6 +5,14 @@ from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
 from menu.models import ItemAttribute
+from menu.settings import hvad
+
+
+if hvad:
+	from hvad.admin import TranslatableAdmin
+	TranslatableAdmin = TranslatableAdmin
+else:
+	TranslatableAdmin = admin.ModelAdmin
 
 
 class GroupAttributeInline(admin.StackedInline):
@@ -27,10 +35,10 @@ class ItemAttributeInline(admin.StackedInline):
 	extra = 0
 
 
-class ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(TranslatableAdmin):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
-	list_editable = ('public', 'sort')
+	list_editable = ('sort',)
 	list_filter = ('public', 'group', 'access')
 	inlines = [ItemAttributeInline]
 

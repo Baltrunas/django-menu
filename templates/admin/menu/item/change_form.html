@@ -39,12 +39,43 @@
 		/* Hide users and groups if access don't need */
 		$('#id_access').change( function() {
 			var access = $("#id_access option:selected").val();
-			if ((access == '4') || (access == '5')) {
+			if ((access == 'exclude') || (access == 'filter')) {
+				$('.field-access_is_active').slideUp();
+				$('.field-access_is_staff').slideUp();
+				$('.field-access_is_superuser').slideUp();
+
+				$('.field-access_denied_group').slideUp();
+				$('.field-access_denied_user').slideUp();
+				$('.field-access_denied_is_active').slideUp();
+				$('.field-access_denied_is_staff').slideUp();
+				$('.field-access_denied_is_superuser').slideUp();
+
 				$('.field-access_group').slideDown();
 				$('.field-access_user').slideDown();
+			} else if (access == 'advanced_access') {
+				$('.field-access_group').slideDown();
+				$('.field-access_user').slideDown();
+				$('.field-access_is_active').slideDown();
+				$('.field-access_is_staff').slideDown();
+				$('.field-access_is_superuser').slideDown();
+
+				$('.field-access_denied_group').slideDown();
+				$('.field-access_denied_user').slideDown();
+				$('.field-access_denied_is_active').slideDown();
+				$('.field-access_denied_is_staff').slideDown();
+				$('.field-access_denied_is_superuser').slideDown();
 			} else {
 				$('.field-access_group').slideUp();
 				$('.field-access_user').slideUp();
+				$('.field-access_is_active').slideUp();
+				$('.field-access_is_staff').slideUp();
+				$('.field-access_is_superuser').slideUp();
+
+				$('.field-access_denied_group').slideUp();
+				$('.field-access_denied_user').slideUp();
+				$('.field-access_denied_is_active').slideUp();
+				$('.field-access_denied_is_staff').slideUp();
+				$('.field-access_denied_is_superuser').slideUp();
 			}
 		});
 		$('#id_access').change();
@@ -81,9 +112,13 @@
 			}
 		});
 		$('#id_group').change();
+
+		$('.field-icon').after($('.field-description'));
+		$('fieldset.module.aligned').prepend($('.field-name'));
 	})(django.jQuery);
 </script>
 <style>
+	.field-name, .field-description {background: #dfd;}
 	select, input {width: 25em!important;}
 	input.vIntegerField {width: 10em!important;}
 	input[type=checkbox] {width: 20px!important;}
