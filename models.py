@@ -13,6 +13,15 @@ from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
 
+from menu.settings import hvad
+
+
+if hvad:
+	from hvad.models import TranslatableModel, TranslatedFields
+	TranslatableModel = TranslatableModel
+else:
+	TranslatableModel = models.Model
+
 
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
@@ -43,8 +52,16 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (models.Model):
-	name = models.CharField(verbose_name=_('Name'), max_length=255)
+class Item (TranslatableModel):
+	if hvad:
+		translations = TranslatedFields(
+			name=models.CharField(verbose_name=_('Name'), max_length=255),
+			description=models.TextField(verbose_name=_('Description'), blank=True)
+		)
+	else:
+		name = models.CharField(verbose_name=_('Name'), max_length=255)
+		description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	URL_TYPE_CHOICES = (
 		(_('internal'),
 			(
@@ -94,16 +111,16 @@ class Item (models.Model):
 		(2, _('No')),
 	)
 
-	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
 
 	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', null=True, blank=True)
 	access_denied_user = models.ManyToManyField(Auth.User, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
 
-	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
-	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0, null=True, blank=True)
+	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
 
 	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
 
@@ -176,7 +193,10 @@ class Item (models.Model):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		return self.name
+		if hvad:
+			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
+		else:
+			return self.name
 
 	class Meta:
 		ordering = ['order', 'sort']
