@@ -14,7 +14,7 @@ from django.contrib.auth import models as Auth
 from django.db import models
 
 
-if 'hvad' in settings.INSTALLED_APPS and 'LANGUAGES' in settings:
+if hasattr(settings.INSTALLED_APPS, 'hvad') and hasattr(settings, 'LANGUAGES'):
 	from hvad.models import TranslatableModel, TranslatedFields
 	TranslatableModel = TranslatableModel
 	multilingual = True
