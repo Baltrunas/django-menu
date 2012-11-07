@@ -17,8 +17,10 @@ from django.db import models
 if 'hvad' in settings.INSTALLED_APPS and 'LANGUAGES' in settings:
 	from hvad.models import TranslatableModel, TranslatedFields
 	TranslatableModel = TranslatableModel
+	multilingual = True
 else:
 	TranslatableModel = models.Model
+	multilingual = False
 
 
 class Group (models.Model):
@@ -51,7 +53,7 @@ class Group (models.Model):
 
 
 class Item (TranslatableModel):
-	if hvad:
+	if multilingual:
 		translations = TranslatedFields(
 			name=models.CharField(verbose_name=_('Name'), max_length=255),
 			description=models.TextField(verbose_name=_('Description'), blank=True)
