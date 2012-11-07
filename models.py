@@ -14,7 +14,7 @@ from django.contrib.auth import models as Auth
 from django.db import models
 
 
-if hasattr(settings.INSTALLED_APPS, 'hvad') and hasattr(settings, 'LANGUAGES'):
+if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
 	from hvad.models import TranslatableModel, TranslatedFields
 	TranslatableModel = TranslatableModel
 	multilingual = True
@@ -194,7 +194,7 @@ class Item (TranslatableModel):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		if hvad:
+		if multilingual:
 			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
 		else:
 			return self.name
