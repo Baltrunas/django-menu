@@ -16,10 +16,10 @@ from django.db import models
 
 if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
 	from hvad.models import TranslatableModel, TranslatedFields
-	TranslatableModel = TranslatableModel
+	BaseModel = TranslatableModel
 	multilingual = True
 else:
-	TranslatableModel = models.Model
+	BaseModel = models.Model
 	multilingual = False
 
 
@@ -52,7 +52,7 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (TranslatableModel):
+class Item (BaseModel):
 	if multilingual:
 		translations = TranslatedFields(
 			name=models.CharField(verbose_name=_('Name'), max_length=255),
