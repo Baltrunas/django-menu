@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 # ugettext_lazy for translation
 from django.utils.translation import ugettext_lazy as _
-# settings for image puth
+# import the settings file
 from django.conf import settings
 # sites for menu group
 from django.contrib.sites.models import Site
@@ -13,10 +13,8 @@ from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
 
-from menu.settings import hvad
 
-
-if hvad:
+if 'hvad' in settings.INSTALLED_APPS and 'LANGUAGES' in settings:
 	from hvad.models import TranslatableModel, TranslatedFields
 	TranslatableModel = TranslatableModel
 else:

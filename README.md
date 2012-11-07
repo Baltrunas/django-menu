@@ -52,6 +52,11 @@ Best tree menu for Django (1.4+)
  -->
 
 # Changelog
+## 2012.11.07
+### Fix
+* url rag load form future
+
+
 ## 2012.10.22
 ### Add
 * Translate to Deutsch
