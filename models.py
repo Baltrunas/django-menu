@@ -138,20 +138,23 @@ class Item (BaseModel):
 		return (self.url_patterns, (), options)
 
 	def get_absolute_url(self):
-		if self.url_type == 'model-oblect':
-			if hasattr(self.content_object, 'get_absolute_url'):
-				if type(self.content_object.get_absolute_url).__name__ == 'instancemethod':
-					return self.content_object.get_absolute_url()
-				elif type(self.content_object.get_absolute_url).__name__ == 'str':
-					return self.content_object.get_absolute_url
+		try:
+			if self.url_type == 'model-oblect':
+				if hasattr(self.content_object, 'get_absolute_url'):
+					if type(self.content_object.get_absolute_url).__name__ == 'instancemethod':
+						return self.content_object.get_absolute_url()
+					elif type(self.content_object.get_absolute_url).__name__ == 'str':
+						return self.content_object.get_absolute_url
+					else:
+						return '#'
 				else:
 					return '#'
+			if self.url_type == 'url-patterns':
+				return self.create_url()
 			else:
-				return '#'
-		if self.url_type == 'url-patterns':
-			return self.create_url()
-		else:
-			return self.url
+				return self.url
+		except:
+			return '#'
 
 	def icon_preview(self):
 		if self.icon:
