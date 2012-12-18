@@ -21,11 +21,12 @@ Best tree menu for Django (1.4+)
 
 # Futures
 * Advanced Access Configuration
-* Optimization menu_tree
-* New translations
-* Fixtures
-* README.md
-* Docs
+* Optimization
+** menu_tree
+** New translations
+** Fixtures
+** README.md
+** Docs
 
 # I think about
 * Add FCBKcomplete for MenuGroup in admin interface.
@@ -53,6 +54,8 @@ Best tree menu for Django (1.4+)
 # Changelog
 ## 2012.10.22
 ### Add
+* Translate to Deutsch
+* Choise model type
 * Options in template
 * Start Advanced Access Configuration
 

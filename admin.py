@@ -5,6 +5,14 @@ from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
 from menu.models import ItemAttribute
+from menu.settings import hvad
+
+
+if hvad:
+	from hvad.admin import TranslatableAdmin
+	TranslatableAdmin = TranslatableAdmin
+else:
+	TranslatableAdmin = admin.ModelAdmin
 
 
 class GroupAttributeInline(admin.StackedInline):

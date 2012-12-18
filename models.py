@@ -13,6 +13,15 @@ from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
 
+from menu.settings import hvad
+
+
+if hvad:
+	from hvad.models import TranslatableModel, TranslatedFields
+	TranslatableModel = TranslatableModel
+else:
+	TranslatableModel = models.Model
+
 
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
@@ -43,8 +52,16 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (models.Model):
-	name = models.CharField(verbose_name=_('Name'), max_length=255)
+class Item (TranslatableModel):
+	if hvad:
+		translations = TranslatedFields(
+			name=models.CharField(verbose_name=_('Name'), max_length=255),
+			description=models.TextField(verbose_name=_('Description'), blank=True)
+		)
+	else:
+		name = models.CharField(verbose_name=_('Name'), max_length=255)
+		description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	URL_TYPE_CHOICES = (
 		(_('internal'),
 			(
@@ -176,7 +193,10 @@ class Item (models.Model):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		return self.name
+		if hvad:
+			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
+		else:
+			return self.name
 
 	class Meta:
 		ordering = ['order', 'sort']
