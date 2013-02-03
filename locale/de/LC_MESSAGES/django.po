@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-22 18:11+0400\n"
+"POT-Creation-Date: 2012-11-08 19:52+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,204 +18,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: models.py:19 models.py:49 models.py:202 models.py:227
+#: models.py:21 models.py:25
 msgid "Name"
 msgstr "Name"
 
-#: models.py:20
-msgid "Slug"
-msgstr ""
-
-#: models.py:20
-msgid ""
-"A slug is the part of a URL which identifies a page using human-readable "
-"keywords"
-msgstr ""
-
-#: models.py:21 models.py:50
+#: models.py:22 models.py:26 models.py:84 models.py:92
 msgid "Description"
 msgstr "Beschreibung"
 
-#: models.py:22
-msgid "Sites"
-msgstr "Seiten"
-
-#: models.py:23 models.py:115 models.py:205 models.py:230
-msgid "Public"
-msgstr "Veröffentlichen"
-
-#: models.py:24 models.py:116 models.py:206 models.py:231
-msgid "Created At"
-msgstr "erstellt am"
-
-#: models.py:25 models.py:117 models.py:207 models.py:232
-msgid "Updated At"
-msgstr "aktualisiert am"
-
-#: models.py:30 models.py:181 models.py:189
-msgid "Menu"
-msgstr "Menü"
-
-#: models.py:36
-msgid "Count"
+#: models.py:28 models.py:96
+msgid "Slug"
 msgstr ""
 
-#: models.py:43 models.py:77 models.py:194
-msgid "Menu Group"
-msgstr "Menü gruppe"
-
-#: models.py:44
-msgid "Menu Groups"
-msgstr "Menü gruppen"
-
-#: models.py:54
-msgid "internal"
-msgstr "intern"
-
-#: models.py:56
-msgid "model oblect"
-msgstr "Objektmodell"
-
-#: models.py:57 models.py:74
-msgid "url patterns"
-msgstr "url"
-
-#: models.py:60 models.py:62
-msgid "external"
-msgstr "extern"
-
-#: models.py:66
-msgid "URL Type"
-msgstr "URL Typ"
-
-#: models.py:68
+#: models.py:29 models.py:97
 msgid "URL"
 msgstr "URL"
 
-#: models.py:70
-msgid "Content Type"
-msgstr "Inhalt Typ"
-
-#: models.py:71
-msgid "Object ID"
-msgstr "Objekt ID"
-
-#: models.py:75
-msgid "URL Options"
-msgstr "URL Option"
-
-#: models.py:78
+#: models.py:30
 msgid "Parent"
-msgstr "Parent"
+msgstr "übergeordnete Kategorie"
 
-#: models.py:79 models.py:149
-msgid "Icon"
-msgstr "Bild"
-
-#: models.py:81
-msgid "Sort"
-msgstr "Sortieren"
-
-#: models.py:82
-msgid "Order"
-msgstr "ordnen"
-
-#: models.py:85 models.py:97
-msgid "All"
-msgstr "Alle"
-
-#: models.py:86
-msgid "Anonymous only"
-msgstr "nur unbekannte"
-
-#: models.py:87
-msgid "Login required"
-msgstr "für registrierte"
-
-#: models.py:88
-msgid "Except"
-msgstr "akzeptieren"
-
-#: models.py:89
-msgid "Only"
-msgstr "nur"
-
-#: models.py:90
-msgid "Advanced Access"
-msgstr "erweite"
-
-#: models.py:92
-msgid "Access"
-msgstr "Zugang"
-
-#: models.py:93
-msgid "Access Group"
-msgstr "Zugangsgruppe"
-
-#: models.py:94
-msgid "User Zugang"
+#: models.py:33
+msgid "Article"
 msgstr ""
 
-#: models.py:98
-msgid "Yes"
-msgstr "Ja"
+#: models.py:34
+msgid "Blog"
+msgstr ""
+
+#: models.py:35
+msgid "News"
+msgstr ""
+
+#: models.py:37
+msgid "Type"
+msgstr ""
+
+#: models.py:39 models.py:104
+msgid "Public"
+msgstr ""
+
+#: models.py:40 models.py:105
+msgid "Created At"
+msgstr "erstellt am"
+
+#: models.py:41 models.py:106
+msgid "Updated At"
+msgstr "aktualisiert am"
+
+#: models.py:59 models.py:74
+msgid "Category"
+msgstr "Kategorie"
+
+#: models.py:75 models.py:98
+msgid "Categories"
+msgstr "Kategorien"
+
+#: models.py:81 models.py:89
+msgid "Title"
+msgstr "Title"
+
+#: models.py:82 models.py:90
+msgid "Header"
+msgstr "Header"
+
+#: models.py:83 models.py:91
+msgid "Keywords"
+msgstr "Keywords"
+
+#: models.py:85 models.py:93
+msgid "Intro Text"
+msgstr ""
+
+#: models.py:86 models.py:94
+msgid "Text"
+msgstr ""
 
 #: models.py:99
-msgid "No"
-msgstr "Nein"
+msgid "Order"
+msgstr "Reihenfolge"
 
-#: models.py:102 models.py:109
-msgid "Is active"
-msgstr "Aktiv"
+#: models.py:100
+msgid "Image"
+msgstr "Bild"
 
-#: models.py:103 models.py:110
-msgid "Is staff"
+#: models.py:101
+msgid "Sites"
+msgstr "Seiten"
+
+#: models.py:102 templates/cms/page_detail.html:7
+msgid "Views"
+msgstr "Anzeigen"
+
+#: models.py:103
+msgid "Main"
 msgstr ""
 
-#: models.py:104 models.py:111
-msgid "Is superuser"
-msgstr ""
+#: models.py:130
+msgid "Page"
+msgstr "Seite"
 
-#: models.py:106
-msgid "Denied Group"
-msgstr ""
-
-#: models.py:107
-msgid "Denied User"
-msgstr ""
-
-#: models.py:113
-msgid "Level"
-msgstr ""
-
-#: models.py:190
-msgid "Menus"
-msgstr "Menü"
-
-#: models.py:199 models.py:224
-msgid "Anchor"
-msgstr "Anker"
-
-#: models.py:203 models.py:228
-msgid "Value"
-msgstr ""
-
-#: models.py:214
-msgid "Menu Group Option"
-msgstr ""
-
-#: models.py:215
-msgid "Menu Group Options"
-msgstr ""
-
-#: models.py:219
-msgid "Menu Item"
-msgstr ""
-
-#: models.py:239
-msgid "Menu Option"
-msgstr ""
-
-#: models.py:240
-msgid "Menu Options"
-msgstr ""
+#: models.py:131
+msgid "Pages"
+msgstr "Seiten"

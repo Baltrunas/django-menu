@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
-
+from django.conf import settings
 from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
 from menu.models import ItemAttribute
-from menu.settings import hvad
 
 
-if hvad:
+if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
 	from hvad.admin import TranslatableAdmin
-	TranslatableAdmin = TranslatableAdmin
+	BaseAdminModel = TranslatableAdmin
 else:
-	TranslatableAdmin = admin.ModelAdmin
+	BaseAdminModel = admin.ModelAdmin
 
 
 class GroupAttributeInline(admin.StackedInline):
@@ -35,7 +34,7 @@ class ItemAttributeInline(admin.StackedInline):
 	extra = 0
 
 
-class ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(BaseAdminModel):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('public', 'sort')
