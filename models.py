@@ -89,7 +89,7 @@ class Item (BaseModel):
 	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
-	description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 
