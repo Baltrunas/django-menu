@@ -165,7 +165,7 @@ class Item (BaseModel):
 	icon_preview.allow_tags = True
 
 	def order_puth(self, this):
-		puth = str(this.sort) + ':' + this.name.replace('|', '')
+		puth = str(this.sort) + ':' + str(this.id)
 		if this.parent:
 			return self.order_puth(this.parent) + '|' + puth
 		else:
