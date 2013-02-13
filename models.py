@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 # ugettext_lazy for translation
 from django.utils.translation import ugettext_lazy as _
-# settings for image puth
+# import the settings file
 from django.conf import settings
 # sites for menu group
 from django.contrib.sites.models import Site
@@ -13,14 +13,14 @@ from django.contrib.auth import models as Auth
 # django ORM
 from django.db import models
 
-from menu.settings import hvad
 
-
-if hvad:
+if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
 	from hvad.models import TranslatableModel, TranslatedFields
-	TranslatableModel = TranslatableModel
+	BaseModel = TranslatableModel
+	multilingual = True
 else:
-	TranslatableModel = models.Model
+	BaseModel = models.Model
+	multilingual = False
 
 
 class Group (models.Model):
@@ -52,8 +52,8 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (TranslatableModel):
-	if hvad:
+class Item (BaseModel):
+	if multilingual:
 		translations = TranslatedFields(
 			name=models.CharField(verbose_name=_('Name'), max_length=255),
 			description=models.TextField(verbose_name=_('Description'), blank=True)
@@ -89,7 +89,7 @@ class Item (TranslatableModel):
 	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
 	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
-	description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 
@@ -138,20 +138,23 @@ class Item (TranslatableModel):
 		return (self.url_patterns, (), options)
 
 	def get_absolute_url(self):
-		if self.url_type == 'model-oblect':
-			if hasattr(self.content_object, 'get_absolute_url'):
-				if type(self.content_object.get_absolute_url).__name__ == 'instancemethod':
-					return self.content_object.get_absolute_url()
-				elif type(self.content_object.get_absolute_url).__name__ == 'str':
-					return self.content_object.get_absolute_url
+		try:
+			if self.url_type == 'model-oblect':
+				if hasattr(self.content_object, 'get_absolute_url'):
+					if type(self.content_object.get_absolute_url).__name__ == 'instancemethod':
+						return self.content_object.get_absolute_url()
+					elif type(self.content_object.get_absolute_url).__name__ == 'str':
+						return self.content_object.get_absolute_url
+					else:
+						return '#'
 				else:
 					return '#'
+			if self.url_type == 'url-patterns':
+				return self.create_url()
 			else:
-				return '#'
-		if self.url_type == 'url-patterns':
-			return self.create_url()
-		else:
-			return self.url
+				return self.url
+		except:
+			return '#'
 
 	def icon_preview(self):
 		if self.icon:
@@ -162,7 +165,7 @@ class Item (TranslatableModel):
 	icon_preview.allow_tags = True
 
 	def order_puth(self, this):
-		puth = str(this.sort) + ':' + this.name.replace('|', '')
+		puth = str(this.sort) + ':' + str(this.id)
 		if this.parent:
 			return self.order_puth(this.parent) + '|' + puth
 		else:
@@ -193,7 +196,7 @@ class Item (TranslatableModel):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		if hvad:
+		if multilingual:
 			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
 		else:
 			return self.name

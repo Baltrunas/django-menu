@@ -1,5 +1,6 @@
 {% extends "admin/change_form.html" %}
-{% block after_field_sets %} 
+{% load url from future %}
+{% block after_field_sets %}
 <script>
 	(function($) {
 		/* Hide unwanted types of url when type change */
@@ -85,12 +86,12 @@
 		var url_patterns = $("#id_url_patterns").val();
 		$("#id_url_patterns").remove();
 		$('.field-url_patterns').append('<select id="id_url_patterns" name="url_patterns"></select>');
-		$("#id_url_patterns").load('{% url menu_url_patterns %}', function() {
+		$("#id_url_patterns").load('{% url 'menu_url_patterns' %}', function() {
 			$("#id_url_patterns option[value=" + url_patterns + "]").attr('selected', 'selected');
 		});
 		//*
 		{% if change %}
-			$("#id_parent").load("{% url menu_parent_tree group_id=original.group.id id=original.id %}", function() {
+			$("#id_parent").load("{% url 'menu_parent_tree' group_id=original.group.id id=original.id %}", function() {
 				$("#id_parent option[value={{ original.parent.id }}]").attr('selected', 'selected');
 			});			
 		{% else %} 
@@ -103,7 +104,7 @@
 			} else {
 				var group_id = $("#id_group option:selected").val();
 				var original_id = {% if change %}{{ original.id }}{% else %}0{% endif %};
-				var menu_parent_tree = '{% url menu_parent_tree_url_pattern %}'
+				var menu_parent_tree = '{% url 'menu_parent_tree_url_pattern' %}'
 					.replace(/group_id/ig, group_id)
 					.replace(/original_id/ig, original_id);
 				$("#id_parent").load(menu_parent_tree, function(){
@@ -118,7 +119,11 @@
 	})(django.jQuery);
 </script>
 <style>
-	/*.field-name, .field-description {background: #dfd;}*/
+	.nani-language-tabs + form .field-name,
+	.nani-language-tabs + form .field-description
+	{
+		background: #dfd;
+	}
 	select, input {width: 25em!important;}
 	input.vIntegerField {width: 10em!important;}
 	input[type=checkbox] {width: 20px!important;}
