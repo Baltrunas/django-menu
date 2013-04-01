@@ -24,7 +24,7 @@ msgstr "Name"
 
 #: models.py:28
 msgid "Slug"
-msgstr ""
+msgstr "Webserverebene"
 
 #: models.py:28
 msgid ""
@@ -42,7 +42,7 @@ msgstr "Seiten"
 
 #: models.py:31 models.py:127 models.py:222 models.py:247
 msgid "Public"
-msgstr ""
+msgstr "veröffentlichen"
 
 #: models.py:32 models.py:128 models.py:223 models.py:248
 msgid "Created At"
@@ -58,19 +58,19 @@ msgstr ""
 
 #: models.py:44
 msgid "Count"
-msgstr ""
+msgstr "Zählung"
 
 #: models.py:51 models.py:89 models.py:211
 msgid "Menu Group"
-msgstr ""
+msgstr "Menü Gruppe"
 
 #: models.py:52
 msgid "Menu Groups"
-msgstr ""
+msgstr "Menü Gruppen"
 
 #: models.py:66
 msgid "internal"
-msgstr ""
+msgstr "intern"
 
 #: models.py:68
 msgid "model oblect"
@@ -82,7 +82,7 @@ msgstr ""
 
 #: models.py:72 models.py:74
 msgid "external"
-msgstr ""
+msgstr "extern"
 
 #: models.py:78
 msgid "URL Type"
@@ -94,7 +94,7 @@ msgstr "URL"
 
 #: models.py:82
 msgid "Content Type"
-msgstr ""
+msgstr "Inhaltstyp"
 
 #: models.py:83
 msgid "Object ID"
@@ -122,7 +122,7 @@ msgstr "Reihenfolge"
 
 #: models.py:97 models.py:109
 msgid "All"
-msgstr ""
+msgstr "alle"
 
 #: models.py:98
 msgid "Anonymous only"
@@ -130,23 +130,23 @@ msgstr ""
 
 #: models.py:99
 msgid "Login required"
-msgstr ""
+msgstr "Login erforderlich"
 
 #: models.py:100
 msgid "Except"
-msgstr ""
+msgstr "akzeptiert"
 
 #: models.py:101
 msgid "Only"
-msgstr ""
+msgstr "nur"
 
 #: models.py:102
 msgid "Advanced Access"
-msgstr ""
+msgstr "erweiterter Zugriff"
 
 #: models.py:104
 msgid "Access"
-msgstr ""
+msgstr "Zugriff"
 
 #: models.py:105
 msgid "Access Group"
@@ -158,11 +158,11 @@ msgstr ""
 
 #: models.py:110
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: models.py:111
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: models.py:114 models.py:121
 msgid "Is active"
@@ -194,7 +194,7 @@ msgstr ""
 
 #: models.py:216 models.py:241
 msgid "Anchor"
-msgstr ""
+msgstr "Anker"
 
 #: models.py:220 models.py:245
 msgid "Value"
