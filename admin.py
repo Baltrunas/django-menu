@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*
 from django.contrib import admin
-from django.conf import settings
 from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
 from menu.models import ItemAttribute
-
-
-if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
-	from hvad.admin import TranslatableAdmin
-	BaseAdminModel = TranslatableAdmin
-else:
-	BaseAdminModel = admin.ModelAdmin
 
 
 class GroupAttributeInline(admin.StackedInline):
@@ -34,11 +26,22 @@ class ItemAttributeInline(admin.StackedInline):
 	extra = 0
 
 
-class ItemAdmin(BaseAdminModel):
+from modeltranslation.admin import TranslationAdmin
+class ItemAdmin(TranslationAdmin):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('sort',)
 	list_filter = ('public', 'group', 'access')
 	inlines = [ItemAttributeInline]
+
+	class Media:
+		js = (
+			'modeltranslation/js/force_jquery.js',
+			'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js',
+			'modeltranslation/js/tabbed_translation_fields.js',
+		)
+		css = {
+			'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+		}
 
 admin.site.register(Item, ItemAdmin)

@@ -22,3 +22,9 @@ def url_patterns(request):
 			if isinstance(key, basestring)
 		])
 	return render_to_response('menu/admin_url_patterns.html', context, context_instance=RequestContext(request), mimetype='text/plain')
+
+
+def update(request):
+	for item in Item.objects.all():
+		item.save()
+	return render_to_response('menu/update.html', context, context_instance=RequestContext(request), mimetype='text/plain')

@@ -3,6 +3,9 @@ from django.conf.urls import patterns
 from django.conf.urls import url
 
 urlpatterns = patterns('menu.views',
+	# Update
+	url(r'^update/$', 'update', name='menu_update'),
+
 	# URL to load url patterns for adding menu items
 	url(r'^url_patterns/$', 'url_patterns', name='menu_url_patterns'),
 	# Perens tree for menu item

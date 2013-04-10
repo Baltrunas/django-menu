@@ -1,5 +1,5 @@
 {% extends "admin/change_form.html" %}
-{% load url from future %}
+
 {% block after_field_sets %}
 <script>
 	(function($) {
@@ -119,11 +119,6 @@
 	})(django.jQuery);
 </script>
 <style>
-	.nani-language-tabs + form .field-name,
-	.nani-language-tabs + form .field-description
-	{
-		background: #dfd;
-	}
 	select, input {width: 25em!important;}
 	input.vIntegerField {width: 10em!important;}
 	input[type=checkbox] {width: 20px!important;}

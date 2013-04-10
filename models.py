@@ -14,15 +14,6 @@ from django.contrib.auth import models as Auth
 from django.db import models
 
 
-if 'hvad' in settings.INSTALLED_APPS and hasattr(settings, 'LANGUAGES'):
-	from hvad.models import TranslatableModel, TranslatedFields
-	BaseModel = TranslatableModel
-	multilingual = True
-else:
-	BaseModel = models.Model
-	multilingual = False
-
-
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
@@ -52,15 +43,9 @@ class Group (models.Model):
 		verbose_name_plural = _('Menu Groups')
 
 
-class Item (BaseModel):
-	if multilingual:
-		translations = TranslatedFields(
-			name=models.CharField(verbose_name=_('Name'), max_length=255),
-			description=models.TextField(verbose_name=_('Description'), blank=True)
-		)
-	else:
-		name = models.CharField(verbose_name=_('Name'), max_length=255)
-		description = models.TextField(verbose_name=_('Description'), blank=True)
+class Item (models.Model):
+	name = models.CharField(verbose_name=_('Name'), max_length=255)
+	description = models.TextField(verbose_name=_('Description'), blank=True)
 
 	URL_TYPE_CHOICES = (
 		(_('internal'),
@@ -87,11 +72,19 @@ class Item (BaseModel):
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
 
 	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
+
 	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
-	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
+	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), null=True, blank=True, editable=False, default=0)
+	childs_count = models.PositiveIntegerField(verbose_name=_('Childs Count'), null=True, blank=True, editable=False)
+
+	left_key = models.PositiveIntegerField(verbose_name=_('Left Key'), null=True, blank=True, editable=False)
+	right_key = models.PositiveIntegerField(verbose_name=_('Right Key'), null=True, blank=True, editable=False)
+
+	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
 
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
-	order = models.SlugField(verbose_name=_('Order'), max_length=255, editable=False)
+
+	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
 
 	ACCESS_CHOICES = (
 		('all', _('All')),
@@ -121,8 +114,6 @@ class Item (BaseModel):
 	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
 	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
 	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
-
-	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), default=0, editable=False)
 
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
@@ -171,10 +162,18 @@ class Item (BaseModel):
 		else:
 			return puth
 
+	def get_level(self):
+		if self.parent_id:
+			return self.parent.get_level() + 1
+		else:
+			return 1
+
 	def save(self, *args, **kwargs):
 		obj = super(Item, self).save(*args, **kwargs)
+		self.childs_count = self.childs.count()
+		self.url = self.get_absolute_url()
+		self.level = self.get_level()
 		self.order = self.order_puth(self)
-		self.level = len(self.order.split('|')) - 1
 		if self.parent:
 			self.group = self.parent.group
 		super(Item, self).save(*args, **kwargs)
@@ -183,10 +182,9 @@ class Item (BaseModel):
 		return obj
 
 	def is_current(self, url):
-		self_url = self.get_absolute_url()
-		if self_url == url:
+		if self.url == url:
 			return 'current'
-		elif self_url != '/' and self_url in url:
+		elif self.url != '/' and self.url in url:
 			return 'parent_of_current'
 		return ''
 
@@ -196,10 +194,7 @@ class Item (BaseModel):
 	display.allow_tags = True
 
 	def __unicode__(self, *args, **kwargs):
-		if multilingual:
-			return self.safe_translation_getter('name', 'MyMode: %s' % self.pk)
-		else:
-			return self.name
+		return self.name
 
 	class Meta:
 		ordering = ['order', 'sort']
