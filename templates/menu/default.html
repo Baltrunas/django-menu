@@ -6,7 +6,7 @@
 		{% for item in menu %}
 			<li class='{{ item|is_current:url }}'>
 				<a href='{{ item.url }}'>
-					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
+					{% if item.icon %}<img src='{{item.icon.url}}' alt='{{ item.name }}'>{% endif %}
 					{{item.name}}
 				</a>
 				{% if item.childs_count > 0 %}
@@ -20,7 +20,7 @@
 		{% for item in childs %}
 			<li class='{{ item|is_current:url }}'>
 				<a href="{{ item.url }}">
-					{% if item.icon %}<img src='{{item.icon.url}}'>{% endif %}
+					{% if item.icon %}<img src='{{item.icon.url}}' alt='{{ item.name }}'>{% endif %}
 					{{ item.name }}
 				</a>
 				{% if item.childs_count > 0 %}
