@@ -31,7 +31,7 @@ class ItemAdmin(TranslationAdmin):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('sort',)
-	list_filter = ('public', 'group', 'access')
+	list_filter = ('public', 'group', 'access', 'sites')
 	inlines = [ItemAttributeInline]
 
 	class Media:

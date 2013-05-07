@@ -11,6 +11,7 @@ from django.db.models import Q
 
 @register.simple_tag(takes_context=True)
 def menu_tree(context, group, tpl='menu/default.html', level=0):
+	host = context['request'].META.get('HTTP_HOST')
 	level += 1
 	t = template.loader.get_template(tpl)
 	user = context['request'].user
@@ -21,7 +22,7 @@ def menu_tree(context, group, tpl='menu/default.html', level=0):
 			url = ''
 
 		if user.is_authenticated():
-			childs = Item.objects.filter(public=True, parent=group).order_by('sort')
+			childs = Item.objects.filter(public=True, parent=group, sites__domain__in=[host]).order_by('sort')
 			# .filter(
 				# Q(access='all') |
 				# Q(access='login_required') |
@@ -33,7 +34,7 @@ def menu_tree(context, group, tpl='menu/default.html', level=0):
 			# ).order_by('sort')
 		else:
 			# Anonymous [All, Anonymous only]
-			childs = Item.objects.filter(public=True, parent=group, access__in=['all', 'anonymous_only']).order_by('sort')
+			childs = Item.objects.filter(public=True, parent=group, access__in=['all', 'anonymous_only'], sites__domain__in=[host]).order_by('sort')
 
 		return t.render(template.Context({'childs': childs, 'level': level, 'url': url, 'request': context['request']}))
 	else:
@@ -44,7 +45,7 @@ def menu_tree(context, group, tpl='menu/default.html', level=0):
 			url = ''
 
 		if user.is_authenticated():
-			menu = Item.objects.filter(public=True, parent=None, group__slug=group).order_by('sort')
+			menu = Item.objects.filter(public=True, parent=None, group__slug=group, sites__domain__in=[host]).order_by('sort')
 			# .filter(
 				# Q(access='all') |
 				# Q(access='login_required') |
@@ -56,7 +57,7 @@ def menu_tree(context, group, tpl='menu/default.html', level=0):
 			# ).order_by('sort')
 		else:
 			# Anonymous [All, Anonymous only]
-			menu = Item.objects.filter(public=True, parent=None, group__slug=group, access__in=['all', 'anonymous_only']).order_by('sort')
+			menu = Item.objects.filter(public=True, parent=None, group__slug=group, access__in=['all', 'anonymous_only'], sites__domain__in=[host]).order_by('sort')
 
 		return t.render(template.Context({'menu': menu, 'menu_group': menu_group, 'level': level, 'url': url, 'request': context['request']}))
 
