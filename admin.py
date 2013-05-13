@@ -4,6 +4,8 @@ from menu.models import Group
 from menu.models import Item
 from menu.models import GroupAttribute
 from menu.models import ItemAttribute
+# translation
+from modeltranslation.admin import TranslationAdmin
 
 
 class GroupAttributeInline(admin.StackedInline):
@@ -26,7 +28,6 @@ class ItemAttributeInline(admin.StackedInline):
 	extra = 0
 
 
-from modeltranslation.admin import TranslationAdmin
 class ItemAdmin(TranslationAdmin):
 	list_display = ('display', 'get_absolute_url', 'group', 'sort', 'public', 'url_type', 'access', 'icon_preview')
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
