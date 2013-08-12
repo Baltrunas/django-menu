@@ -1,4 +1,4 @@
-# django-menu v4.0
+# django-menu v0.6
 Best tree menu for Django (1.4+)
 
 # How to use
@@ -53,6 +53,9 @@ Best tree menu for Django (1.4+)
 
 # Changelog
 ## 2013.08.12
+### Fix
+* Bugs
+* New numeration style
 ### Optimization
 * Menu tag and template
 ### Delete
