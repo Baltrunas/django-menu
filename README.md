@@ -16,8 +16,9 @@ Best tree menu for Django (1.4+)
 
 ## Use
 ### In template:
-{% load menu_tree %}
-{% menu_tree 'main_menu' %}
+{% load menu_tags %}
+{% menu 'menu_group' %}
+{% menu group, parent=None, tpl_file='menu/default.html' %}
 
 # Futures
 * Advanced Access Configuration
@@ -29,7 +30,6 @@ Best tree menu for Django (1.4+)
 ** Docs
 
 # I think about
-* Add FCBKcomplete for MenuGroup in admin interface.
 * migrations
 * https://github.com/jphalip/django-treemenus
 <!-- 
@@ -50,6 +50,14 @@ Best tree menu for Django (1.4+)
 			current += 10
 	 (Also see templatetags / menubuilder.py)
  -->
+
+# Changelog
+## 2013.08.12
+### Optimization
+* Menu tag and template
+### Delete
+* GroupAttribute
+* ItemAttribute
 
 # Changelog
 ## 2012.11.08

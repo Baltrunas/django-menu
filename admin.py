@@ -2,15 +2,8 @@
 from django.contrib import admin
 from menu.models import Group
 from menu.models import Item
-from menu.models import GroupAttribute
-from menu.models import ItemAttribute
 # translation
 # from modeltranslation.admin import TranslationAdmin
-
-
-class GroupAttributeInline(admin.StackedInline):
-	model = GroupAttribute
-	extra = 0
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -18,14 +11,8 @@ class GroupAdmin(admin.ModelAdmin):
 	search_fields = ('name', 'slug', 'description', 'id')
 	list_editable = ['public']
 	list_filter = ['public']
-	inlines = [GroupAttributeInline]
 
 admin.site.register(Group, GroupAdmin)
-
-
-class ItemAttributeInline(admin.StackedInline):
-	model = ItemAttribute
-	extra = 0
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -33,7 +20,6 @@ class ItemAdmin(admin.ModelAdmin):
 	search_fields = ('name', 'url', 'group', 'sort', 'public')
 	list_editable = ('sort',)
 	list_filter = ('public', 'group', 'access', 'sites')
-	inlines = [ItemAttributeInline]
 
 	# class Media:
 		# js = (

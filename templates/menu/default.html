@@ -1,33 +1,23 @@
 {% load menu_tags %}
 
 {% spaceless %}
-{% if menu_group %}
-	<ul id='{{ menu_group }}' class='level-{{level}}'>
+	<ul class='m-level-{{ level }} b-menu-{{ group }}'>
 		{% for item in menu %}
-			<li class='{{ item|is_current:url }}'>
-				<a href='{{ item.url }}'>
-					{% if item.icon %}<img src='{{item.icon.url}}' alt='{{ item.name }}'>{% endif %}
-					{{item.name}}
-				</a>
-				{% if item.childs_count > 0 %}
-					{% menu_tree item level=level %}
-				{% endif %}
-			</li>
-		{% endfor %}
-	</ul>
-{% else %}
-	<ul class='level-{{level}}'>
-		{% for item in childs %}
-			<li class='{{ item|is_current:url }}'>
-				<a href="{{ item.url }}">
-					{% if item.icon %}<img src='{{item.icon.url}}' alt='{{ item.name }}'>{% endif %}
+			<li class='
+				b-menu-{{ group }}-item
+				{% if item|is_current:url %}m-menu-item_current{% endif %}
+				{% if item|is_parent:url %}m-menu-item_parent{% endif %}
+				'>
+				<a href='{{ item.url }}' class='b-menu-{{ group }}-item-link'>
+					{% if item.icon %}
+						<img src='{{ item.icon.url }}' alt='{{ item.name }}' class='b-menu-{{ group }}-item-link__icon'>
+					{% endif %}
 					{{ item.name }}
 				</a>
 				{% if item.childs_count > 0 %}
-					{% menu_tree item level=level %}
+					{% menu group item %}
 				{% endif %}
 			</li>
 		{% endfor %}
 	</ul>
-{% endif %}
 {% endspaceless %}

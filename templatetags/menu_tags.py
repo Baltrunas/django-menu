@@ -5,61 +5,51 @@ register = template.Library()
 from menu.models import Item
 
 from django.db.models import Q
-# from django.contrib.auth.models import User
-# user = User()
+from django.contrib.auth.models import User
+user = User()
 
 
 @register.simple_tag(takes_context=True)
-def menu_tree(context, group, tpl='menu/default.html', level=0):
+def menu(context, group, parent=None, tpl_file='menu/default.html'):
 	host = context['request'].META.get('HTTP_HOST')
-	level += 1
-	t = template.loader.get_template(tpl)
 	user = context['request'].user
-	if hasattr(group, 'childs'):
-		try:
-			url = context['url']
-		except:
-			url = ''
-
-		if user.is_authenticated():
-			childs = Item.objects.filter(public=True, parent=group, sites__domain__in=[host]).order_by('sort')
-			# .filter(
-				# Q(access='all') |
-				# Q(access='login_required') |
-				# Q(access='filter', access_user__in=[user]) |
-				# Q(access='filter', access_group__in=user.groups.all())
-			# ).exclude(
-				# Q(access='exclude', access_user__in=[user]) |
-				# Q(access='exclude', access_group__in=user.groups.all())
-			# ).order_by('sort')
-		else:
-			# Anonymous [All, Anonymous only]
-			childs = Item.objects.filter(public=True, parent=group, access__in=['all', 'anonymous_only'], sites__domain__in=[host]).order_by('sort')
-
-		return t.render(template.Context({'childs': childs, 'level': level, 'url': url, 'request': context['request']}))
+	tpl = template.loader.get_template(tpl_file)
+	tpl_context = {}
+	tpl_context['request'] = context['request']
+	if parent:
+		tpl_context['level'] = parent.level + 1
 	else:
-		menu_group = group
-		try:
-			url = context['request'].META['PATH_INFO']
-		except:
-			url = ''
+		tpl_context['level'] = 1
+	tpl_context['group'] = group
+	tpl_context['parent'] = parent
+	try:
+		tpl_context['url'] = context['request'].META['PATH_INFO']
+	except:
+		tpl_context['url'] = ''
 
-		if user.is_authenticated():
-			menu = Item.objects.filter(public=True, parent=None, group__slug=group, sites__domain__in=[host]).order_by('sort')
-			# .filter(
-				# Q(access='all') |
-				# Q(access='login_required') |
-				# Q(access='filter', access_user__in=[user]) |
-				# Q(access='filter', access_group__in=user.groups.all())
-			# ).exclude(
-				# Q(access='exclude', access_user__in=[user]) |
-				# Q(access='exclude', access_group__in=user.groups.all())
-			# ).order_by('sort')
-		else:
-			# Anonymous [All, Anonymous only]
-			menu = Item.objects.filter(public=True, parent=None, group__slug=group, access__in=['all', 'anonymous_only'], sites__domain__in=[host]).order_by('sort')
 
-		return t.render(template.Context({'menu': menu, 'menu_group': menu_group, 'level': level, 'url': url, 'request': context['request']}))
+	menu = Item.objects.filter(public=True, parent=parent, group__slug=group, sites__domain__in=[host]).order_by('sort')
+
+	# ACCESS
+	if user.is_authenticated():
+		menu.filter(
+			Q(access='all') |
+			Q(access='login_required') |
+			Q(access='filter', access_user__in=[user]) |
+			Q(access='filter', access_group__in=user.groups.all())
+		).exclude(
+			Q(access='exclude', access_user__in=[user]) |
+			Q(access='exclude', access_group__in=user.groups.all())
+		).order_by('sort')
+	else:
+		menu = menu.filter(access__in=['all', 'anonymous_only'])
+
+	tpl_context['menu'] = menu
+
+	if tpl_context['menu']:
+		return tpl.render(template.Context(tpl_context))
+	else:
+		return ''
 
 
 @register.filter
@@ -67,10 +57,9 @@ def is_current(instance, args):
 	return instance.is_current(args)
 
 
-@register.simple_tag
-def attribute_list(list, place):
-	t = template.loader.get_template('menu/attribute_list.html')
-	return t.render(template.Context({'list': list, 'place': place}))
+@register.filter
+def is_parent(instance, args):
+	return instance.is_parent(args)
 
 
 @register.simple_tag

@@ -18,7 +18,9 @@ class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
 	description = models.TextField(verbose_name=_('Description'), blank=True)
+
 	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menus', null=True, blank=True)
+
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
@@ -185,10 +187,20 @@ class Item (models.Model):
 
 	def is_current(self, url):
 		if self.url == url:
-			return 'current'
-		elif self.url != '/' and self.url in url:
-			return 'parent_of_current'
-		return ''
+			return True
+		else:
+			return False
+
+	def is_parent(self, url):
+		childs = self.childs.filter(public=True)
+		if childs:
+			for item in childs:
+				if item.url == url:
+					return True
+				else:
+					return item.is_parent(url)
+		else:
+			return False
 
 	def display(self):
 		return '&nbsp;' * self.level * 8 + self.name
@@ -202,53 +214,3 @@ class Item (models.Model):
 		ordering = ['order', 'sort']
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
-
-
-class GroupAttribute(models.Model):
-	group = models.ForeignKey(Group, verbose_name=_('Menu Group'), related_name='options')
-	PLACE_CHOICES = (
-		('ul', 'ul'),
-		('li', 'li'),
-		('a', 'a'),
-		('anchor', _('Anchor')),
-	)
-	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
-	name = models.CharField(verbose_name=_('Name'), max_length=256)
-	value = models.CharField(verbose_name=_('Value'), max_length=256)
-
-	public = models.BooleanField(verbose_name=_('Public'), default=True)
-	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
-	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
-
-	def __unicode__(self):
-		return self.name + '=' + self.value
-
-	class Meta:
-		ordering = ['name']
-		verbose_name = _('Menu Group Option')
-		verbose_name_plural = _('Menu Group Options')
-
-
-class ItemAttribute (models.Model):
-	item = models.ForeignKey(Item, verbose_name=_('Menu Item'), related_name='options')
-	PLACE_CHOICES = (
-		('ul', 'ul'),
-		('li', 'li'),
-		('a', 'a'),
-		('anchor', _('Anchor')),
-	)
-	place = models.CharField(max_length=20, choices=PLACE_CHOICES)
-	name = models.CharField(verbose_name=_('Name'), max_length=256)
-	value = models.CharField(verbose_name=_('Value'), max_length=256)
-
-	public = models.BooleanField(verbose_name=_('Public'), default=True)
-	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
-	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
-
-	def __unicode__(self):
-		return self.name + '=' + self.value
-
-	class Meta:
-		ordering = ['name']
-		verbose_name = _('Menu Option')
-		verbose_name_plural = _('Menu Options')
