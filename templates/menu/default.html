@@ -7,6 +7,7 @@
 				b-menu-{{ group }}-item
 				{% if item|is_current:url %}m-menu-item_current{% endif %}
 				{% if item|is_parent:url %}m-menu-item_parent{% endif %}
+				m-menu-{{ group }}-item-{{ item.id }}
 				'>
 				<a href='{{ item.url }}' class='b-menu-{{ group }}-item-link'>
 					{% if item.icon %}
