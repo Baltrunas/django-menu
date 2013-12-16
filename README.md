@@ -32,6 +32,9 @@ Best tree menu for Django (1.4+)
 # I think about
 * migrations
 * https://github.com/jphalip/django-treemenus
+* https://github.com/rossp/django-menu
+* https://pypi.python.org/pypi/django-menus
+* http://www.templatemonster.com/demo/43709.html
 <!-- 
 	https://github.com/rossp/django-menu
 	def save(self, force_insert=False, force_update=False):

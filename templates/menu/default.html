@@ -1,17 +1,17 @@
 {% load menu_tags %}
 
 {% spaceless %}
-	<ul class='m-level-{{ level }} b-menu-{{ group }}'>
+	<ul class='b-menu m-{{ group }} m-level-{{ level }}'>
 		{% for item in menu %}
 			<li class='
-				b-menu-{{ group }}-item
+				b-menu-item
 				{% if item|is_current:url %}m-menu-item_current{% endif %}
 				{% if item|is_parent:url %}m-menu-item_parent{% endif %}
-				m-menu-{{ group }}-item-{{ item.id }}
+				m-{{ group }}-item-{{ item.id }}
 				'>
-				<a href='{{ item.url }}' class='b-menu-{{ group }}-item-link'>
+				<a href='{{ item.url }}' class='b-menu-item__link'>
 					{% if item.icon %}
-						<img src='{{ item.icon.url }}' alt='{{ item.name }}' class='b-menu-{{ group }}-item-link__icon'>
+						<img src='{{ item.icon.url }}' alt='{{ item.name }}' class='b-menu-item__icon'>
 					{% endif %}
 					{{ item.name }}
 				</a>
