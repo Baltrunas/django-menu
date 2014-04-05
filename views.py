@@ -17,10 +17,10 @@ def parent_tree(request, group_id=0, id=0):
 def url_patterns(request):
 	resolver = urlresolvers.get_resolver(None)
 	context['patterns'] = sorted([
-			(key, value[0][0][0])
-			for key, value in resolver.reverse_dict.items()
+		(key, value[0][0][0])
+		for key, value in resolver.reverse_dict.items()
 			if isinstance(key, basestring)
-		])
+	])
 	return render_to_response('menu/admin_url_patterns.html', context, context_instance=RequestContext(request), mimetype='text/plain')
 
 
