@@ -6,6 +6,22 @@ from menu.models import Item
 # from modeltranslation.admin import TranslationAdmin
 
 
+from django.contrib.sites.models import Site 
+def __unicode__(self): 
+	return self.name 
+
+Site.__unicode__ = __unicode__
+
+from django.contrib.contenttypes.models import ContentType
+def __unicode__(self): 
+	return '%s -> %s' % (self.app_label, self.name)
+
+
+ContentType._meta.ordering = ['app_label', 'name']
+ContentType.__unicode__ = __unicode__
+
+
+
 class GroupAdmin(admin.ModelAdmin):
 	list_display = ('name', 'slug', 'description', 'public', 'menu', 'count')
 	search_fields = ('name', 'slug', 'description', 'id')
