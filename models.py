@@ -98,7 +98,7 @@ class Item (models.Model):
 	)
 	access = models.CharField(verbose_name=_('Access'), max_length=32, choices=ACCESS_CHOICES, default='all')
 	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Access Group'), related_name='menus', null=True, blank=True)
-	access_user = models.ManyToManyField(Auth.User, verbose_name=_('Access User'), related_name='menus', null=True, blank=True)
+	access_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Access User'), related_name='menus', null=True, blank=True)
 
 	BOOL_CHOICES = (
 		(0, _('All')),
@@ -111,7 +111,7 @@ class Item (models.Model):
 	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
 
 	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', null=True, blank=True)
-	access_denied_user = models.ManyToManyField(Auth.User, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
+	access_denied_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
 
 	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
 	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
@@ -214,3 +214,13 @@ class Item (models.Model):
 		ordering = ['order', 'sort']
 		verbose_name = _('Menu')
 		verbose_name_plural = _('Menus')
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save)
+def update_links(sender, **kwargs):
+	if sender != Item:
+		for item in Item.objects.all():
+			item.save()

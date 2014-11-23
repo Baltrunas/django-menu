@@ -21,7 +21,6 @@ ContentType._meta.ordering = ['app_label', 'name']
 ContentType.__unicode__ = __unicode__
 
 
-
 class GroupAdmin(admin.ModelAdmin):
 	list_display = ('name', 'slug', 'description', 'public', 'menu', 'count')
 	search_fields = ('name', 'slug', 'description', 'id')
@@ -29,6 +28,12 @@ class GroupAdmin(admin.ModelAdmin):
 	list_filter = ['public']
 
 admin.site.register(Group, GroupAdmin)
+
+
+from django.conf.urls import patterns
+from django.shortcuts import render_to_response
+
+from django.template import RequestContext
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -47,4 +52,27 @@ class ItemAdmin(admin.ModelAdmin):
 			# 'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
 		# }
 
+
+
+	def get_urls(self):
+		urls = super(ItemAdmin, self).get_urls()
+		my_urls = patterns('',
+			(r'^update/$', self.admin_site.admin_view(self.update))
+		)
+		return my_urls + urls
+
+	def update(self, request):
+		context = {}
+		return render_to_response('menu/update.html', context, context_instance=RequestContext(request), mimetype='text/plain')
+
+
+
+
 admin.site.register(Item, ItemAdmin)
+
+
+def your_action(self, request, queryset):
+	pass
+
+
+admin.site.add_action(your_action)
