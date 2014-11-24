@@ -1,23 +1,20 @@
-# -*- coding: utf-8 -*
-# ugettext_lazy for translation
 from django.utils.translation import ugettext_lazy as _
-# import the settings file
+
 from django.conf import settings
-# sites for menu group
+
 from django.contrib.sites.models import Site
-# contenttypes for menu to create urls to object of model
+
+from django.contrib.auth import models as Auth
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-# for access control
-from django.contrib.auth import models as Auth
-# django ORM
+
 from django.db import models
 
 
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
-	description = models.TextField(verbose_name=_('Description'), blank=True)
 
 	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menus', null=True, blank=True)
 
@@ -27,7 +24,7 @@ class Group (models.Model):
 
 	# Link to items of this group
 	def menu(self):
-		return '<a href="../item/?group__id__exact=%s"><img src="%simg/menu/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
+		return '<a href="../item/?group__id__exact=%s"><img src="%smenu/img/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
 	menu.short_description = _('Menu')
 	menu.allow_tags = True
 
