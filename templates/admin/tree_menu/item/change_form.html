@@ -116,6 +116,16 @@
 
 		$('.field-icon').after($('.field-description'));
 		$('fieldset.module.aligned').prepend($('.field-name'));
+
+
+		$('#id_url_patterns').on('change', function(){
+			data = $(this).find(':selected').data();
+			options = Object.keys(data);
+			url_options = options.join("=\n");
+			if (url_options) url_options += '=';
+			$('#id_url_options').val(url_options);
+		});
+
 	})(django.jQuery);
 </script>
 <style>

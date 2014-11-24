@@ -1,4 +1,6 @@
-<option value=''>---------</option>
+	<option value=''>---------</option>
 {% for item in patterns %}
-	<option value='{{item.0}}'>/{{item.1}}</option>
+	<option value='{{ item.url_name }}' {% for param in item.url_param %}data-{{ param }}='true'{% endfor %}>
+		^{{ item.url_reg_ex }}
+	</option>
 {% endfor %}

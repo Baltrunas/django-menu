@@ -2,7 +2,7 @@
 from django import template
 register = template.Library()
 
-from menu.models import Item
+from .models import Item
 
 from django.db.models import Q
 from django.contrib.auth.models import User
