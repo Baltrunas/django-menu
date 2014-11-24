@@ -21,3 +21,27 @@ Tree menu for Django
 * Take some ideas from https://github.com/jphalip/django-treemenus
 * Documentation
 * Advanced Access Configuration
+
+☐ locale/
+✔ static/
+☐ templates/
+	☐ admin
+		☐ tree_menu
+			☐ item
+				☐ change_form.html
+	☐ menu
+		☐ admin_tree.html
+		☐ admin_url_patterns.html
+		☐ default.html
+		☐ update.html
+☐ templatetags/
+	☐ __init__.py
+	☐ menu_tags.py
+☐ __init__.py
+☐ admin.py
+✔ apps.py
+☐ models.py
+✔ readme.md
+☐ translation.py
+☐ urls.py
+☐ views.py
