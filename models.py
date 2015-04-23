@@ -169,7 +169,7 @@ class Item (models.Model):
 		else:
 			return 1
 
-	def save(self, *args, **kwargs):
+	def save(self, sort=True, *args, **kwargs):
 		obj = super(Item, self).save(*args, **kwargs)
 		self.childs_count = self.childs.count()
 		self.url = self.get_absolute_url()
@@ -178,8 +178,9 @@ class Item (models.Model):
 		if self.parent:
 			self.group = self.parent.group
 		super(Item, self).save(*args, **kwargs)
-		for item in self.childs.all():
-			item.save()
+		if sort:
+			for item in self.childs.all():
+				item.save()
 		return obj
 
 	def is_current(self, url):
@@ -215,9 +216,14 @@ class Item (models.Model):
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import logging
+
 
 @receiver(post_save)
-def update_links(sender, **kwargs):
+def update_links(sender, instance, **kwargs):
+	logging.warning('update_links')
+	content_type = ContentType.objects.get_for_model(sender)
 	if sender != Item:
-		for item in Item.objects.all():
-			item.save()
+		for item in Item.objects.filter(content_type=content_type, object_id=instance.id):
+			logging.warning('Save menu item %s' % item.id)
+			item.save(sort=False)

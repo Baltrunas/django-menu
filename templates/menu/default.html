@@ -10,7 +10,7 @@
 				m-{{ group }}-item-{{ item.id }}
 				{% if item.childs_count > 0 %}m-has_childs{% endif %}
 				'>
-				<a href='{{ item.url }}' class='b-menu-item__link'>
+				<a {% if item.url != '#' %} href='{{ item.url }}' {% endif %} class='b-menu-item__link {% if item.url == '#' %}m-menu_item__text{% endif %}'>
 					{% if item.icon %}
 						<img src='{{ item.icon.url }}' alt='{{ item.name }}' class='b-menu-item__icon'>
 					{% endif %}
