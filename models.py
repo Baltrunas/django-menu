@@ -7,7 +7,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import models as Auth
 
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from django.db import models
 
@@ -65,7 +65,7 @@ class Item (models.Model):
 	# for model object
 	content_type = models.ForeignKey(ContentType, verbose_name=_('Content Type'), null=True, blank=True)
 	object_id = models.PositiveIntegerField(verbose_name=_('Object ID'), null=True, blank=True)
-	content_object = generic.GenericForeignKey('content_type', 'object_id')
+	content_object = GenericForeignKey('content_type', 'object_id')
 	# for url patterns
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
