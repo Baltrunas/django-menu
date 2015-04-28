@@ -224,6 +224,9 @@ def update_links(sender, instance, **kwargs):
 	logging.warning('update_links')
 	content_type = ContentType.objects.get_for_model(sender)
 	if sender != Item:
-		for item in Item.objects.filter(content_type=content_type, object_id=instance.id):
-			logging.warning('Save menu item %s' % item.id)
-			item.save(sort=False)
+		try:
+			for item in Item.objects.filter(content_type=content_type, object_id=instance.id):
+				logging.warning('Save menu item %s' % item.id)
+				item.save(sort=False)
+		except:
+			pass
