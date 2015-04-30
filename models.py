@@ -16,7 +16,7 @@ class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
 
-	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menus', null=True, blank=True)
+	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menus', blank=True)
 
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
@@ -94,8 +94,8 @@ class Item (models.Model):
 		('advanced_access', _('Advanced Access')),
 	)
 	access = models.CharField(verbose_name=_('Access'), max_length=32, choices=ACCESS_CHOICES, default='all')
-	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Access Group'), related_name='menus', null=True, blank=True)
-	access_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Access User'), related_name='menus', null=True, blank=True)
+	access_group = models.ManyToManyField(Auth.Group, verbose_name=_('Access Group'), related_name='menus', blank=True)
+	access_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Access User'), related_name='menus', blank=True)
 
 	BOOL_CHOICES = (
 		(0, _('All')),
@@ -103,18 +103,18 @@ class Item (models.Model):
 		(2, _('No')),
 	)
 
-	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
-	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
-	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), choices=BOOL_CHOICES, default=0)
+	access_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), choices=BOOL_CHOICES, default=0)
+	access_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), choices=BOOL_CHOICES, default=0)
 
-	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', null=True, blank=True)
-	access_denied_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Denied User'), related_name='denied_menus', null=True, blank=True)
+	access_denied_group = models.ManyToManyField(Auth.Group, verbose_name=_('Denied Group'), related_name='denied_menus', blank=True)
+	access_denied_user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name=_('Denied User'), related_name='denied_menus', blank=True)
 
-	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), max_length=1, choices=BOOL_CHOICES, default=0)
-	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), max_length=1, choices=BOOL_CHOICES, default=0)
-	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), max_length=1, choices=BOOL_CHOICES, default=0)
+	access_denied_is_active = models.PositiveSmallIntegerField(verbose_name=_('Is active'), choices=BOOL_CHOICES, default=0)
+	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), choices=BOOL_CHOICES, default=0)
+	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), choices=BOOL_CHOICES, default=0)
 
-	sites = models.ManyToManyField(Site, related_name='site_menu_items', verbose_name=_('Sites'), null=True, blank=True)
+	sites = models.ManyToManyField(Site, related_name='site_menu_items', verbose_name=_('Sites'), blank=True)
 
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
