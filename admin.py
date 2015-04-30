@@ -16,7 +16,7 @@ Site.__unicode__ = site_unicode
 def contenttype_unicode(self): 
 	return '%s -> %s' % (self.app_label, self.name)
 
-ContentType._meta.ordering = ['app_label', 'name']
+ContentType._meta.ordering = ['app_label']
 ContentType.__unicode__ = contenttype_unicode
 
 
