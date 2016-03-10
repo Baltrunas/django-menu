@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-30 15:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2016-03-09 11:40+0600\n"
+"Last-Translator:   <info@express-page.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.7.9\n"
 
 #: models.py:27 models.py:58 models.py:62 models.py:219 models.py:244
 msgid "Name"
@@ -34,7 +35,7 @@ msgstr ""
 
 #: models.py:29 models.py:59 models.py:63
 msgid "Description"
-msgstr ""
+msgstr "Описание"
 
 #: models.py:30
 msgid "Sites"
@@ -122,73 +123,71 @@ msgstr "Порядок"
 
 #: models.py:97 models.py:109
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #: models.py:98
 msgid "Anonymous only"
-msgstr ""
+msgstr "Только для анонимных"
 
 #: models.py:99
 msgid "Login required"
-msgstr ""
+msgstr "Только для зарегистрированных"
 
 #: models.py:100
 msgid "Except"
-msgstr ""
+msgstr "Исключая"
 
 #: models.py:101
 msgid "Only"
-msgstr ""
+msgstr "Только"
 
 #: models.py:102
 msgid "Advanced Access"
-msgstr ""
+msgstr "Расширенный доступ"
 
 #: models.py:104
 msgid "Access"
-msgstr ""
+msgstr "Доступ"
 
 #: models.py:105
-#, fuzzy
 msgid "Access Group"
-msgstr "Группу меню"
+msgstr "Доступ груп"
 
 #: models.py:106
 msgid "Access User"
-msgstr ""
+msgstr "Доступ пользоавтелям"
 
 #: models.py:110
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: models.py:111
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: models.py:114 models.py:121
 msgid "Is active"
-msgstr ""
+msgstr "Активный"
 
 #: models.py:115 models.py:122
 msgid "Is staff"
-msgstr ""
+msgstr "Статус персонала"
 
 #: models.py:116 models.py:123
 msgid "Is superuser"
-msgstr ""
+msgstr "Суперпользователь"
 
 #: models.py:118
-#, fuzzy
 msgid "Denied Group"
-msgstr "Группу меню"
+msgstr "Запрещённые группы"
 
 #: models.py:119
 msgid "Denied User"
-msgstr ""
+msgstr "Запрещённые пользователи"
 
 #: models.py:125
 msgid "Level"
-msgstr ""
+msgstr "Уровень"
 
 #: models.py:207
 msgid "Menus"
@@ -196,39 +195,12 @@ msgstr "Меню"
 
 #: models.py:216 models.py:241
 msgid "Anchor"
-msgstr ""
+msgstr "Якорь"
 
 #: models.py:220 models.py:245
 msgid "Value"
-msgstr ""
-
-#: models.py:231
-#, fuzzy
-msgid "Menu Group Option"
-msgstr "Группу меню"
-
-#: models.py:232
-#, fuzzy
-msgid "Menu Group Options"
-msgstr "Группы меню"
+msgstr "Значение"
 
 #: models.py:236
-#, fuzzy
 msgid "Menu Item"
-msgstr "Меню"
-
-#: models.py:256
-#, fuzzy
-msgid "Menu Option"
-msgstr "Опции URL"
-
-#: models.py:257
-#, fuzzy
-msgid "Menu Options"
-msgstr "Опции URL"
-
-#~ msgid "Text"
-#~ msgstr "Текст"
-
-#~ msgid "urls"
-#~ msgstr "URLs"
+msgstr "Элемент меню"

@@ -7,7 +7,7 @@ Tree menu for Django
 ## Install
 * Add to INSTALLED_APPS ```'apps.menu',```
 * Add to urls.py  ```url(r'^admin_tree_menu/', include('apps.menu.urls')),```
-* manage.py syncdb
+* manage.py migrate tree_menu
 * manage.py collectstatic
 
 ## Use in template

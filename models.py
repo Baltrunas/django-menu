@@ -219,14 +219,14 @@ from django.dispatch import receiver
 import logging
 
 
-@receiver(post_save)
-def update_links(sender, instance, **kwargs):
-	logging.warning('update_links')
-	content_type = ContentType.objects.get_for_model(sender)
-	if sender != Item:
-		try:
-			for item in Item.objects.filter(content_type=content_type, object_id=instance.id):
-				logging.warning('Save menu item %s' % item.id)
-				item.save(sort=False)
-		except:
-			pass
+# @receiver(post_save)
+# def update_links(sender, instance, **kwargs):
+# 	content_type = ContentType.objects.get_for_model(sender)
+# 	if sender != Item:
+# 		logging.warning('Update menu item')
+# 		try:
+# 			for item in Item.objects.filter(content_type=content_type, object_id=instance.id):
+# 				logging.warning('Save menu item %s' % item.id)
+# 				item.save(sort=False)
+# 		except:
+# 			pass
