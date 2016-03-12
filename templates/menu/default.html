@@ -1,25 +1,46 @@
 {% load menu_tags %}
 
-{% spaceless %}
-	<ul class='b-menu m-{{ group }} m-level-{{ level }}'>
+
+{# {% spaceless %} #}
+
+
+{% if level == 1 %}<nav class='b-menu m-menu_{{ group }}' role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
+
+	<ul class='b-menu-list m-menu-level_{{ level }}'>
 		{% for item in menu %}
 			<li class='
 				b-menu-item
+
 				{% if item|is_current:url %}m-menu-item_current{% endif %}
 				{% if item|is_parent:url %}m-menu-item_parent{% endif %}
-				m-{{ group }}-item-{{ item.id }}
-				{% if item.childs_count > 0 %}m-has_childs{% endif %}
-				'>
-				<a {% if item.url != '#' %} href='{{ item.url }}' {% endif %} class='b-menu-item__link {% if item.url == '#' %}m-menu_item__text{% endif %}'>
+				{% if item.childs_count > 0 %}m-menu-item_has-childs{% endif %}
+
+				m-menu-item_{{ item.id }}'
+
+			><!-- b-menu-item -->
+				{% if item.url != "#" %} 
+					<a class='b-menu-item__link' href='{{ item.url }}' itemprop='url'>
+						{% if item.icon %}
+							<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}' itemprop='image'>
+						{% endif %}
+						<span class='b-menu-item__text' itemprop='name'>{{ item.name }}</span>
+					</a><!-- b-menu-item__link -->
+				{% else %}
 					{% if item.icon %}
-						<img src='{{ item.icon.url }}' alt='{{ item.name }}' class='b-menu-item__icon'>
+						<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}'>
 					{% endif %}
-					{{ item.name }}
-				</a>
+					<span class='b-menu-item__text'>{{ item.name }}</span>
+				{% endif %}  
+
 				{% if item.childs_count > 0 %}
 					{% menu group item %}
 				{% endif %}
+
 			</li>
 		{% endfor %}
-	</ul>
-{% endspaceless %}
+	</ul><!-- b-menu-list m-menu-level_{{ level }} -->
+
+{% if level == 1 %}</nav>{% endif %}
+
+
+{# {% endspaceless %} #}
