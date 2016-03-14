@@ -1,9 +1,5 @@
 {% load menu_tags %}
 
-
-{# {% spaceless %} #}
-
-
 {% if level == 1 %}<nav class='b-menu m-menu_{{ group }}' role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
 
 	<ul class='b-menu-list m-menu-level_{{ level }}'>
@@ -23,13 +19,13 @@
 						{% if item.icon %}
 							<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}' itemprop='image'>
 						{% endif %}
-						<span class='b-menu-item__text' itemprop='name'>{{ item.name }}</span>
+						<span class='b-menu-item__name' itemprop='name'>{{ item.name }}</span>
 					</a><!-- b-menu-item__link -->
 				{% else %}
 					{% if item.icon %}
 						<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}'>
 					{% endif %}
-					<span class='b-menu-item__text'>{{ item.name }}</span>
+					<span class='b-menu-item__name'>{{ item.name }}</span>
 				{% endif %}  
 
 				{% if item.childs_count > 0 %}
@@ -38,9 +34,6 @@
 
 			</li>
 		{% endfor %}
-	</ul><!-- b-menu-list m-menu-level_{{ level }} -->
+	</ul><!-- b-menu-list -->
 
-{% if level == 1 %}</nav>{% endif %}
-
-
-{# {% endspaceless %} #}
+{% if level == 1 %}</nav>{% endif %}<!-- b-menu -->
