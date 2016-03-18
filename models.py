@@ -16,7 +16,7 @@ class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
 	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
 
-	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menus', blank=True)
+	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menu_groups', blank=True)
 
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
@@ -114,7 +114,7 @@ class Item (models.Model):
 	access_denied_is_staff = models.PositiveSmallIntegerField(verbose_name=_('Is staff'), choices=BOOL_CHOICES, default=0)
 	access_denied_is_superuser = models.PositiveSmallIntegerField(verbose_name=_('Is superuser'), choices=BOOL_CHOICES, default=0)
 
-	sites = models.ManyToManyField(Site, related_name='site_menu_items', verbose_name=_('Sites'), blank=True)
+	sites = models.ManyToManyField(Site, related_name='menu_items', verbose_name=_('Sites'), blank=True)
 
 	public = models.BooleanField(verbose_name=_('Public'), default=True)
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
