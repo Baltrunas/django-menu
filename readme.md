@@ -2,7 +2,8 @@
 Tree menu for Django
 
 ## Required
-```'django.core.context_processors.request',```
+* ```django-seo```
+* ```'django.core.context_processors.request',```
 
 ## Install
 * Add to INSTALLED_APPS ```'apps.menu',```

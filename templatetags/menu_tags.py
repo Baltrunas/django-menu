@@ -1,4 +1,3 @@
-# -*- utf-8 -*-
 from django import template
 register = template.Library()
 
@@ -11,7 +10,7 @@ user = User()
 
 @register.simple_tag(takes_context=True)
 def menu(context, group, parent=None, tpl_file='menu/default.html'):
-	host = context['request'].META.get('HTTP_HOST')
+	site = context['request'].site
 	user = context['request'].user
 	tpl = template.loader.get_template(tpl_file)
 	tpl_context = {}
@@ -28,7 +27,7 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 		tpl_context['url'] = ''
 
 
-	menu = Item.objects.filter(public=True, parent=parent, group__slug=group, sites__domain__in=[host]).order_by('sort')
+	menu = Item.objects.filter(public=True, parent=parent, group__slug=group, sites__in=[site]).order_by('sort')
 
 	# ACCESS
 	if user.is_authenticated():
