@@ -2,6 +2,7 @@
 Tree menu for Django
 
 ## Required
+* pip install django-helpful
 * ```django-seo```
 * ```'django.core.context_processors.request',```
 

@@ -11,10 +11,12 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 from django.db import models
 
+from helpful.fields import upload_to
+
 
 class Group (models.Model):
 	name = models.CharField(verbose_name=_('Name'), max_length=128)
-	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
+	slug = models.SlugField(verbose_name=_('Slug'), max_length=128, unique=True, help_text=_('A slug is the part of a URL which identifies a page using human-readable keywords'))
 
 	sites = models.ManyToManyField(Site, verbose_name=_('Sites'), related_name='menu_groups', blank=True)
 
@@ -83,7 +85,7 @@ class Item (models.Model):
 
 	sort = models.PositiveSmallIntegerField(verbose_name=_('Sort'), default=500)
 
-	icon = models.ImageField(verbose_name=_('Icon'), upload_to='img/menu', blank=True)
+	icon = models.ImageField(verbose_name=_('Icon'), upload_to=upload_to, blank=True)
 
 	ACCESS_CHOICES = (
 		('all', _('All')),
