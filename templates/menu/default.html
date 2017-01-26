@@ -1,6 +1,6 @@
 {% load menu_tags %}
 
-{% if level == 1 %}<nav class='b-menu m-menu_{{ group }}' role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
+{% if level == 1 %}<nav class='b-menu m-menu_{{ group }}' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
 
 	<ul class='b-menu-list m-menu-level_{{ level }}'>
 		{% for item in menu %}

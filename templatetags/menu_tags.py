@@ -31,12 +31,13 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 
 	# ACCESS
 	if user.is_authenticated():
-		menu.filter(
+		menu = menu.filter(
 			Q(access='all') |
 			Q(access='login_required') |
 			Q(access='filter', access_user__in=[user]) |
 			Q(access='filter', access_group__in=user.groups.all())
 		).exclude(
+			Q(access='anonymous_only') |
 			Q(access='exclude', access_user__in=[user]) |
 			Q(access='exclude', access_group__in=user.groups.all())
 		).order_by('sort')
