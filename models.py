@@ -10,6 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 from django.db import models
+from django.utils.safestring import mark_safe
 
 from helpful.fields import upload_to
 
@@ -35,7 +36,7 @@ class Group (models.Model):
 		return self.items.count()
 	count.short_description = _('Count')
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 
 	class Meta:
@@ -65,16 +66,16 @@ class Item (models.Model):
 	# for external url
 	url = models.CharField(verbose_name=_('URL'), max_length=255, default='#', blank=True)
 	# for model object
-	content_type = models.ForeignKey(ContentType, verbose_name=_('Content Type'), null=True, blank=True)
+	content_type = models.ForeignKey(ContentType, verbose_name=_('Content Type'), null=True, blank=True, on_delete=models.CASCADE)
 	object_id = models.PositiveIntegerField(verbose_name=_('Object ID'), null=True, blank=True)
 	content_object = GenericForeignKey('content_type', 'object_id')
 	# for url patterns
 	url_patterns = models.CharField(verbose_name=_('url patterns'), max_length=255, blank=True)
 	url_options = models.TextField(verbose_name=_('URL Options'), blank=True, help_text='key1=value1<br>key2=value2')
 
-	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'))
+	group = models.ForeignKey(Group, related_name='items', verbose_name=_('Menu Group'), on_delete=models.CASCADE)
 
-	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs')
+	parent = models.ForeignKey('self', verbose_name=_('Parent'), null=True, blank=True, related_name='childs', on_delete=models.CASCADE)
 	level = models.PositiveSmallIntegerField(verbose_name=_('Level'), null=True, blank=True, editable=False, default=0)
 	childs_count = models.PositiveIntegerField(verbose_name=_('Childs Count'), null=True, blank=True, editable=False)
 
@@ -135,7 +136,7 @@ class Item (models.Model):
 		try:
 			if self.url_type == 'model-oblect':
 				if hasattr(self.content_object, 'get_absolute_url'):
-					if type(self.content_object.get_absolute_url).__name__ == 'instancemethod':
+					if type(self.content_object.get_absolute_url).__name__ == 'method':
 						return self.content_object.get_absolute_url()
 					elif type(self.content_object.get_absolute_url).__name__ == 'str':
 						return self.content_object.get_absolute_url
@@ -203,11 +204,11 @@ class Item (models.Model):
 			return False
 
 	def display(self):
-		return '&nbsp;' * self.level * 8 + self.name
+		return mark_safe('&nbsp;' * self.level * 8 + self.name)
 	display.short_description = _('Menu')
 	display.allow_tags = True
 
-	def __unicode__(self, *args, **kwargs):
+	def __str__(self, *args, **kwargs):
 		return self.name
 
 	class Meta:

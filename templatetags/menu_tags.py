@@ -30,7 +30,7 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 	menu = Item.objects.filter(public=True, parent=parent, group__slug=group, sites__in=[site]).order_by('sort')
 
 	# ACCESS
-	if user.is_authenticated():
+	if user.is_authenticated:
 		menu = menu.filter(
 			Q(access='all') |
 			Q(access='login_required') |
@@ -47,7 +47,7 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 	tpl_context['menu'] = menu
 
 	if tpl_context['menu']:
-		return tpl.render(template.Context(tpl_context))
+		return tpl.render(tpl_context)
 	else:
 		return ''
 

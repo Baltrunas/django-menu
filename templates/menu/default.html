@@ -1,31 +1,31 @@
 {% load menu_tags %}
 
-{% if level == 1 %}<nav class='b-menu m-menu_{{ group }}' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
+{% if level == 1 %}<nav class='menu menu--{{ group }}' itemscope itemtype='http://schema.org/SiteNavigationElement'>{% endif %}
 
-	<ul class='b-menu-list m-menu-level_{{ level }}'>
+	<ul class='menu-list menu-list--level_{{ level }}'>
 		{% for item in menu %}
 			<li class='
-				b-menu-item
+				menu-list-item
 
-				{% if item|is_current:url %}m-menu-item_current{% endif %}
-				{% if item|is_parent:url %}m-menu-item_parent{% endif %}
-				{% if item.childs_count > 0 %}m-menu-item_has-childs{% endif %}
+				{% if item|is_current:url %}menu-list-item--current{% endif %}
+				{% if item|is_parent:url %}menu-list-item--parent{% endif %}
+				{% if item.childs_count > 0 %}menu-list-item--has-childs{% endif %}
 
-				m-menu-item_{{ item.id }}'
+				menu-list-item--id_{{ item.id }}'
 
-			><!-- b-menu-item -->
+			><!-- menu-list-item -->
 				{% if item.url != "#" %} 
-					<a class='b-menu-item__link' href='{{ item.url }}' itemprop='url'>
+					<a class='menu-list-item__link' href='{{ item.url }}' itemprop='url'>
 						{% if item.icon %}
-							<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}' itemprop='image'>
+							<img class='menu-list-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}' itemprop='image'>
 						{% endif %}
-						<span class='b-menu-item__name' itemprop='name'>{{ item.name }}</span>
-					</a><!-- b-menu-item__link -->
+						<span class='menu-list-item__name' itemprop='name'>{{ item.name }}</span>
+					</a><!-- menu-list-item__link -->
 				{% else %}
 					{% if item.icon %}
-						<img class='b-menu-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}'>
+						<img class='menu-list-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}'>
 					{% endif %}
-					<span class='b-menu-item__name'>{{ item.name }}</span>
+					<span class='menu-list-item__name'>{{ item.name }}</span>
 				{% endif %}  
 
 				{% if item.childs_count > 0 %}
@@ -34,6 +34,6 @@
 
 			</li>
 		{% endfor %}
-	</ul><!-- b-menu-list -->
+	</ul><!-- menu-list -->
 
-{% if level == 1 %}</nav>{% endif %}<!-- b-menu -->
+{% if level == 1 %}</nav>{% endif %}<!-- menu -->

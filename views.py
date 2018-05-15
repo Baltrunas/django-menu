@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.core import urlresolvers
+# from django.core import urlresolvers
+from django.urls.resolvers import get_resolver
 
 from .models import Item
 
@@ -13,10 +14,11 @@ def parent_tree(request, group_id=0, id=0):
 
 def url_patterns(request):
 	context = {}
-	resolver = urlresolvers.get_resolver(None)
+	resolver = get_resolver(None)
+
 	context['patterns'] = []
 	for key, value in resolver.reverse_dict.items():
-		if isinstance(key, basestring):
+		if isinstance(key, str):
 			url = {
 				'url_name': key,
 				'url_reg_ex': value[1],
