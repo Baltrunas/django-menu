@@ -67,6 +67,6 @@ def admin_menu_tree(parent, id):
 	t = template.loader.get_template('menu/admin_tree.html')
 	if hasattr(parent, 'childs'):
 		childs = parent.childs.exclude(pk=id).order_by('sort')
-		return t.render(template.Context({'childs': childs, 'id': id}))
+		return t.render({'childs': childs, 'id': id})
 	else:
-		return t.render(template.Context({'menu': parent, 'id': id}))
+		return t.render({'menu': parent, 'id': id})
