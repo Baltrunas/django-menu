@@ -1,7 +1,7 @@
 from django import template
 register = template.Library()
 
-from ..models import Item
+from ..models import Group, Item
 
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -19,7 +19,7 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 		tpl_context['level'] = parent.level + 1
 	else:
 		tpl_context['level'] = 1
-	tpl_context['group'] = group
+	tpl_context['group'] = Group.objects.get(slug=group)
 	tpl_context['parent'] = parent
 	try:
 		tpl_context['url'] = context['request'].META['PATH_INFO']
