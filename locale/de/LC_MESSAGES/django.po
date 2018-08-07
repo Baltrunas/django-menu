@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 07:40+0000\n"
+"POT-Creation-Date: 2018-08-01 08:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,189 +18,190 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: apps.py:8 models.py:28 models.py:205 models.py:213
+#: apps/menu/apps.py:8 apps/menu/models.py:31 apps/menu/models.py:208
+#: apps/menu/models.py:216
 msgid "Menu"
 msgstr ""
 
-#: models.py:16 models.py:46
+#: apps/menu/models.py:19 apps/menu/models.py:49
 msgid "Name"
 msgstr "Name"
 
-#: models.py:17
+#: apps/menu/models.py:20
 msgid "Slug"
 msgstr "Webserverebene"
 
-#: models.py:17
+#: apps/menu/models.py:20
 msgid ""
 "A slug is the part of a URL which identifies a page using human-readable "
 "keywords"
 msgstr ""
 
-#: models.py:19 models.py:117
+#: apps/menu/models.py:22 apps/menu/models.py:120
 msgid "Sites"
 msgstr "Seiten"
 
-#: models.py:21 models.py:119
+#: apps/menu/models.py:24 apps/menu/models.py:122
 msgid "Public"
 msgstr "veröffentlichen"
 
-#: models.py:22 models.py:120
+#: apps/menu/models.py:25 apps/menu/models.py:123
 msgid "Created At"
 msgstr "erstellt am"
 
-#: models.py:23 models.py:121
+#: apps/menu/models.py:26 apps/menu/models.py:124
 msgid "Updated At"
 msgstr "aktualisiert am"
 
-#: models.py:34
+#: apps/menu/models.py:37
 msgid "Count"
 msgstr "Zählung"
 
-#: models.py:41 models.py:73
+#: apps/menu/models.py:44 apps/menu/models.py:76
 msgid "Menu Group"
 msgstr "Menü Gruppe"
 
-#: models.py:42
+#: apps/menu/models.py:45
 msgid "Menu Groups"
 msgstr "Menü Gruppen"
 
-#: models.py:47
+#: apps/menu/models.py:50
 msgid "Description"
 msgstr "Beschreibung"
 
-#: models.py:50
+#: apps/menu/models.py:53
 msgid "internal"
 msgstr "intern"
 
-#: models.py:52
+#: apps/menu/models.py:55
 msgid "model oblect"
 msgstr ""
 
-#: models.py:53 models.py:70
+#: apps/menu/models.py:56 apps/menu/models.py:73
 msgid "url patterns"
 msgstr ""
 
-#: models.py:56 models.py:58
+#: apps/menu/models.py:59 apps/menu/models.py:61
 msgid "external"
 msgstr "extern"
 
-#: models.py:62
+#: apps/menu/models.py:65
 msgid "URL Type"
 msgstr ""
 
-#: models.py:64
+#: apps/menu/models.py:67
 msgid "URL"
 msgstr "URL"
 
-#: models.py:66
+#: apps/menu/models.py:69
 msgid "Content Type"
 msgstr "Inhaltstyp"
 
-#: models.py:67
+#: apps/menu/models.py:70
 msgid "Object ID"
 msgstr ""
 
-#: models.py:71
+#: apps/menu/models.py:74
 msgid "URL Options"
 msgstr ""
 
-#: models.py:75
+#: apps/menu/models.py:78
 msgid "Parent"
 msgstr "übergeordnete Kategorie"
 
-#: models.py:76
+#: apps/menu/models.py:79
 msgid "Level"
 msgstr ""
 
-#: models.py:77
+#: apps/menu/models.py:80
 msgid "Childs Count"
 msgstr ""
 
-#: models.py:79
+#: apps/menu/models.py:82
 msgid "Left Key"
 msgstr ""
 
-#: models.py:80
+#: apps/menu/models.py:83
 msgid "Right Key"
 msgstr ""
 
-#: models.py:82
+#: apps/menu/models.py:85
 msgid "Order"
 msgstr "Reihenfolge"
 
-#: models.py:84
+#: apps/menu/models.py:87
 msgid "Sort"
 msgstr ""
 
-#: models.py:86 models.py:156
+#: apps/menu/models.py:89 apps/menu/models.py:159
 msgid "Icon"
 msgstr ""
 
-#: models.py:89 models.py:101
+#: apps/menu/models.py:92 apps/menu/models.py:104
 msgid "All"
 msgstr "alle"
 
-#: models.py:90
+#: apps/menu/models.py:93
 msgid "Anonymous only"
 msgstr ""
 
-#: models.py:91
+#: apps/menu/models.py:94
 msgid "Login required"
 msgstr "Login erforderlich"
 
-#: models.py:92
+#: apps/menu/models.py:95
 msgid "Except"
 msgstr "akzeptiert"
 
-#: models.py:93
+#: apps/menu/models.py:96
 msgid "Only"
 msgstr "nur"
 
-#: models.py:94
+#: apps/menu/models.py:97
 msgid "Advanced Access"
 msgstr "erweiterter Zugriff"
 
-#: models.py:96
+#: apps/menu/models.py:99
 msgid "Access"
 msgstr "Zugriff"
 
-#: models.py:97
+#: apps/menu/models.py:100
 msgid "Access Group"
 msgstr ""
 
-#: models.py:98
+#: apps/menu/models.py:101
 msgid "Access User"
 msgstr ""
 
-#: models.py:102
+#: apps/menu/models.py:105
 msgid "Yes"
 msgstr "Ja"
 
-#: models.py:103
+#: apps/menu/models.py:106
 msgid "No"
 msgstr "Nein"
 
-#: models.py:106 models.py:113
+#: apps/menu/models.py:109 apps/menu/models.py:116
 msgid "Is active"
 msgstr ""
 
-#: models.py:107 models.py:114
+#: apps/menu/models.py:110 apps/menu/models.py:117
 msgid "Is staff"
 msgstr ""
 
-#: models.py:108 models.py:115
+#: apps/menu/models.py:111 apps/menu/models.py:118
 msgid "Is superuser"
 msgstr ""
 
-#: models.py:110
+#: apps/menu/models.py:113
 msgid "Denied Group"
 msgstr ""
 
-#: models.py:111
+#: apps/menu/models.py:114
 msgid "Denied User"
 msgstr ""
 
-#: models.py:214
+#: apps/menu/models.py:217
 msgid "Menus"
 msgstr ""
 

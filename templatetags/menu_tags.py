@@ -22,7 +22,7 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 	tpl_context['group'] = Group.objects.get(slug=group)
 	tpl_context['parent'] = parent
 	try:
-		tpl_context['url'] = context['request'].META['PATH_INFO']
+		tpl_context['url'] = context['request'].path_info
 	except:
 		tpl_context['url'] = ''
 
