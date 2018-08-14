@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 09:04+0000\n"
+"POT-Creation-Date: 2018-08-14 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,20 +16,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 #: apps/menu/apps.py:8 apps/menu/models.py:31 apps/menu/models.py:208
 #: apps/menu/models.py:216
 msgid "Menu"
-msgstr "Navigation"
+msgstr ""
 
 #: apps/menu/models.py:19 apps/menu/models.py:49
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: apps/menu/models.py:20
 msgid "Slug"
-msgstr "Webserverebene"
+msgstr ""
 
 #: apps/menu/models.py:20
 msgid ""
@@ -39,39 +38,39 @@ msgstr ""
 
 #: apps/menu/models.py:22 apps/menu/models.py:120
 msgid "Sites"
-msgstr "Seiten"
+msgstr ""
 
 #: apps/menu/models.py:24 apps/menu/models.py:122
 msgid "Public"
-msgstr "veröffentlichen"
+msgstr ""
 
 #: apps/menu/models.py:25 apps/menu/models.py:123
 msgid "Created At"
-msgstr "erstellt am"
+msgstr ""
 
 #: apps/menu/models.py:26 apps/menu/models.py:124
 msgid "Updated At"
-msgstr "aktualisiert am"
+msgstr ""
 
 #: apps/menu/models.py:37
 msgid "Count"
-msgstr "Zählung"
+msgstr ""
 
 #: apps/menu/models.py:44 apps/menu/models.py:76
 msgid "Menu Group"
-msgstr "Navigationsgruppe"
+msgstr ""
 
 #: apps/menu/models.py:45
 msgid "Menu Groups"
-msgstr "Navigationsgruppen"
+msgstr ""
 
 #: apps/menu/models.py:50
 msgid "Description"
-msgstr "Beschreibung"
+msgstr ""
 
 #: apps/menu/models.py:53
 msgid "internal"
-msgstr "intern"
+msgstr ""
 
 #: apps/menu/models.py:55
 msgid "model oblect"
@@ -83,7 +82,7 @@ msgstr ""
 
 #: apps/menu/models.py:59 apps/menu/models.py:61
 msgid "external"
-msgstr "extern"
+msgstr ""
 
 #: apps/menu/models.py:65
 msgid "URL Type"
@@ -91,11 +90,11 @@ msgstr ""
 
 #: apps/menu/models.py:67
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: apps/menu/models.py:69
 msgid "Content Type"
-msgstr "Inhaltstyp"
+msgstr ""
 
 #: apps/menu/models.py:70
 msgid "Object ID"
@@ -107,7 +106,7 @@ msgstr ""
 
 #: apps/menu/models.py:78
 msgid "Parent"
-msgstr "übergeordnete Kategorie"
+msgstr ""
 
 #: apps/menu/models.py:79
 msgid "Level"
@@ -127,7 +126,7 @@ msgstr ""
 
 #: apps/menu/models.py:85
 msgid "Order"
-msgstr "Reihenfolge"
+msgstr ""
 
 #: apps/menu/models.py:87
 msgid "Sort"
@@ -139,7 +138,7 @@ msgstr ""
 
 #: apps/menu/models.py:92 apps/menu/models.py:104
 msgid "All"
-msgstr "alle"
+msgstr ""
 
 #: apps/menu/models.py:93
 msgid "Anonymous only"
@@ -147,23 +146,23 @@ msgstr ""
 
 #: apps/menu/models.py:94
 msgid "Login required"
-msgstr "Login erforderlich"
+msgstr ""
 
 #: apps/menu/models.py:95
 msgid "Except"
-msgstr "akzeptiert"
+msgstr ""
 
 #: apps/menu/models.py:96
 msgid "Only"
-msgstr "nur"
+msgstr ""
 
 #: apps/menu/models.py:97
 msgid "Advanced Access"
-msgstr "erweiterter Zugriff"
+msgstr ""
 
 #: apps/menu/models.py:99
 msgid "Access"
-msgstr "Zugriff"
+msgstr ""
 
 #: apps/menu/models.py:100
 msgid "Access Group"
@@ -175,11 +174,11 @@ msgstr ""
 
 #: apps/menu/models.py:105
 msgid "Yes"
-msgstr "Ja"
+msgstr ""
 
 #: apps/menu/models.py:106
 msgid "No"
-msgstr "Nein"
+msgstr ""
 
 #: apps/menu/models.py:109 apps/menu/models.py:116
 msgid "Is active"
@@ -203,34 +202,4 @@ msgstr ""
 
 #: apps/menu/models.py:217
 msgid "Menus"
-msgstr "Organisation der Navigation"
-
-#~ msgid "Anchor"
-#~ msgstr "Anker"
-
-#~ msgid "Category"
-#~ msgstr "Kategorie"
-
-#~ msgid "Categories"
-#~ msgstr "Kategorien"
-
-#~ msgid "Title"
-#~ msgstr "Title"
-
-#~ msgid "Header"
-#~ msgstr "Header"
-
-#~ msgid "Keywords"
-#~ msgstr "Keywords"
-
-#~ msgid "Image"
-#~ msgstr "Bild"
-
-#~ msgid "Views"
-#~ msgstr "Anzeigen"
-
-#~ msgid "Page"
-#~ msgstr "Seite"
-
-#~ msgid "Pages"
-#~ msgstr "Seiten"
+msgstr ""
