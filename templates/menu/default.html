@@ -26,7 +26,7 @@
 						<img class='menu-list-item__icon' src='{{ item.icon.url }}' alt='{{ item.name }}'>
 					{% endif %}
 					<span class='menu-list-item__name'>{{ item.name }}</span>
-				{% endif %}  
+				{% endif %}
 
 				{% if item.childs_count > 0 %}
 					{% menu group.slug item %}

@@ -21,7 +21,7 @@ ContentType.__unicode__ = contenttype_unicode
 
 
 class GroupAdmin(admin.ModelAdmin):
-	list_display = ['name', 'slug', 'public', 'menu', 'count']
+	list_display = ['name', 'slug', 'public', 'count']
 	search_fields = ['name', 'slug', 'id']
 	list_editable = ['public']
 	list_filter = ['public', 'sites']

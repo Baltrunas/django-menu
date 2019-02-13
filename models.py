@@ -10,6 +10,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 from django.db import models
+
+from django.urls import reverse
+
 from django.utils.safestring import mark_safe
 
 from helpful.fields import upload_to
@@ -25,16 +28,10 @@ class Group (models.Model):
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	# Link to items of this group
-	def menu(self):
-		return '<a href="../item/?group__id__exact=%s"><img src="%smenu/img/item_list.png"></a>' % (self.id, str(settings.STATIC_URL))
-	menu.short_description = _('Menu')
-	menu.allow_tags = True
-
-	# Count of items in this group
 	def count(self):
-		return self.items.count()
+		return mark_safe('<a href="../item/?group__id__exact=%s">%s</a>' % (self.id, self.items.count()))
 	count.short_description = _('Count')
+	count.allow_tags = True
 
 	def __str__(self):
 		return self.name
@@ -123,14 +120,14 @@ class Item (models.Model):
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	@models.permalink
-	def create_url(self):
-		options = {}
-		for option in self.url_options.split('\n'):
-			if option:
-				option = option.split('=')
-				options[option[0]] = option[1]
-		return (self.url_patterns, (), options)
+	# @reverse
+	# def create_url(self):
+	# 	options = {}
+	# 	for option in self.url_options.split('\n'):
+	# 		if option:
+	# 			option = option.split('=')
+	# 			options[option[0]] = option[1]
+	# 	return (self.url_patterns, (), options)
 
 	def get_absolute_url(self):
 		try:
