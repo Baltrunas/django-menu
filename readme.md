@@ -8,7 +8,7 @@ Tree menu for Django
 
 ## Install
 * Add to INSTALLED_APPS ```'apps.menu',```
-* Add to urls.py  ```url(r'^admin_tree_menu/', include('apps.menu.urls')),```
+* Add to urls.py  ```path('admin_tree_menu/', include('apps.menu.urls')),```
 * manage.py migrate tree_menu
 * manage.py collectstatic
 
@@ -25,7 +25,6 @@ Tree menu for Django
 * Advanced Access Configuration
 
 ☐ locale/
-✔ static/
 ☐ templates/
 	☐ admin
 		☐ tree_menu
