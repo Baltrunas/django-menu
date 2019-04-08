@@ -120,14 +120,13 @@ class Item (models.Model):
 	created_at = models.DateTimeField(verbose_name=_('Created At'), auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name=_('Updated At'), auto_now=True)
 
-	# @reverse
-	# def create_url(self):
-	# 	options = {}
-	# 	for option in self.url_options.split('\n'):
-	# 		if option:
-	# 			option = option.split('=')
-	# 			options[option[0]] = option[1]
-	# 	return (self.url_patterns, (), options)
+	def create_url(self):
+		options = {}
+		for option in self.url_options.split('\n'):
+			if option:
+				option = option.split('=')
+				options[option[0]] = option[1]
+		return reverse(self.url_patterns, args=options)
 
 	def get_absolute_url(self):
 		try:
