@@ -194,8 +194,9 @@ class Item (models.Model):
 			for item in childs:
 				if item.url == url:
 					return True
-				else:
-					return item.is_parent(url)
+				# else:
+					# return item.is_parent(url)
+			# raise
 		else:
 			return False
 
