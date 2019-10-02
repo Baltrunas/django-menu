@@ -15,6 +15,10 @@ def menu(context, group, parent=None, tpl_file='menu/default.html'):
 	tpl = template.loader.get_template(tpl_file)
 	tpl_context = {}
 	tpl_context['request'] = context['request']
+
+	if type(parent) == type(0):
+		parent = Item.objects.get(id=parent)
+
 	if parent:
 		tpl_context['level'] = parent.level + 1
 	else:
